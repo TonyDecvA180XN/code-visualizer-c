@@ -79,7 +79,7 @@ The visualizer accepts a compilation database — a format of describing of sour
 You can specify input files simply as arguments:
 
 ```PS
-.\code-visualizer-c.exe main.c header.h ...
+.\code-visualizer-c.exe main.c header.h ... --
 ```
 
 or use `compile_commands.json` if you build your project with CMake and use flag `-DCMAKE_EXPORT_COMPILE_COMMANDS=1`:
