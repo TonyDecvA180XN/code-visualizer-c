@@ -1,0 +1,1708 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bildigo</title>
+    <style id="code-css-style">
+        :root {
+            color: #586e75;
+            --bildigo-primary-color: #e6e1ce
+        }
+
+        :root {
+            color: #586e75;
+            --bildigo-secondary-color: #8e8b7f
+        }
+
+        :root {
+            color: #586e75;
+            --bildigo-text-color: #586e75
+        }
+
+        a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {
+            color: #586e75;
+            background-color: #beb9aa
+        }
+
+        .gl {
+            color: #d33682
+        }
+
+        .cl {
+            color: #586e75
+        }
+
+        .sep {
+            color: #586e75;
+            background-color: #a6a295
+        }
+
+        .gt {
+            color: #d33682
+        }
+
+        .si {
+            color: #2aa198
+        }
+
+        .s1 {
+            color: #2aa198
+        }
+
+        .gd {
+            color: #d33682
+        }
+
+        .lnt {
+            color: #7f7f7f
+        }
+
+        .vc {
+            color: #268bd2
+        }
+
+        .sb {
+            color: #2aa198
+        }
+
+        .x {
+            color: #586e75
+        }
+
+        .kt {
+            color: #859900;
+            font-weight: bold
+        }
+
+        .ne {
+            color: #268bd2
+        }
+
+        .fm {
+            color: #268bd2
+        }
+
+        .nl {
+            color: #268bd2
+        }
+
+        .ln {
+            color: #7f7f7f
+        }
+
+        . {
+            color: #586e75
+        }
+
+            .file-tab, .selected-file {
+                color: #586e75;
+                background-color: #e2dcca
+            }
+
+            .l {
+                color: #2aa198
+            }
+
+            .mb {
+                color: #2aa198;
+                font-weight: bold
+            }
+
+            .gu {
+                color: #d33682
+            }
+
+            .vm {
+                color: #268bd2
+            }
+
+            .mi {
+                color: #2aa198;
+                font-weight: bold
+            }
+
+            .mo {
+                color: #2aa198;
+                font-weight: bold
+            }
+
+            .cp {
+                color: #93a1a1;
+                font-style: italic
+            }
+
+            .cpf {
+                color: #93a1a1;
+                font-style: italic
+            }
+
+            .w {
+                color: #586e75
+            }
+
+            .k {
+                color: #859900
+            }
+
+            .py {
+                color: #268bd2
+            }
+
+            .il {
+                color: #2aa198;
+                font-weight: bold
+            }
+
+            .c {
+                color: #93a1a1;
+                font-style: italic
+            }
+
+            .c1 {
+                color: #93a1a1;
+                font-style: italic
+            }
+
+            .kn {
+                color: #dc322f;
+                font-weight: bold
+            }
+
+            .ld {
+                color: #2aa198
+            }
+
+            .sc {
+                color: #2aa198
+            }
+
+            .gi {
+                color: #d33682
+            }
+
+            .gs {
+                color: #d33682
+            }
+
+            .kp {
+                color: #859900
+            }
+
+            .na {
+                color: #268bd2
+            }
+
+            .sx {
+                color: #2aa198
+            }
+
+            .hl {
+                color: #586e75;
+                background-color: #d6d0bf
+            }
+
+            .nf {
+                color: #268bd2
+            }
+
+            .sh {
+                color: #2aa198
+            }
+
+            .s {
+                color: #2aa198
+            }
+
+            .ss {
+                color: #2aa198
+            }
+
+            .mf {
+                color: #2aa198;
+                font-weight: bold
+            }
+
+            .no {
+                color: #268bd2
+            }
+
+            .m {
+                color: #2aa198;
+                font-weight: bold
+            }
+
+            .o {
+                color: #586e75
+            }
+
+            .p {
+                color: #586e75
+            }
+
+            .kc {
+                color: #859900;
+                font-weight: bold
+            }
+
+            .bp {
+                color: #268bd2
+            }
+
+            .nc {
+                color: #cb4b16
+            }
+
+            .gh {
+                color: #d33682
+            }
+
+            .gp {
+                color: #d33682
+            }
+
+            .kd {
+                color: #859900
+            }
+
+            .dl {
+                color: #2aa198
+            }
+
+            .cs {
+                color: #93a1a1;
+                font-style: italic
+            }
+
+            .ge {
+                color: #d33682
+            }
+
+            .gr {
+                color: #d33682
+            }
+
+            .err {
+                color: #586e75
+            }
+
+            .nd {
+                color: #268bd2
+            }
+
+            .nv {
+                color: #268bd2
+            }
+
+            .bg {
+                color: #586e75;
+                background-color: #eee8d5
+            }
+
+            .sd {
+                color: #2aa198
+            }
+
+            .s2 {
+                color: #2aa198
+            }
+
+            .vi {
+                color: #268bd2
+            }
+
+            .sr {
+                color: #2aa198
+            }
+
+            .mh {
+                color: #2aa198;
+                font-weight: bold
+            }
+
+            .lntd {
+                color: #586e75
+            }
+
+            .ni {
+                color: #268bd2
+            }
+
+            .vg {
+                color: #268bd2
+            }
+
+            .nt {
+                color: #268bd2;
+                font-weight: bold
+            }
+
+            .sa {
+                color: #2aa198
+            }
+
+            .g {
+                color: #d33682
+            }
+
+            .go {
+                color: #d33682
+            }
+
+            .line {
+                color: #586e75
+            }
+
+            .n {
+                color: #268bd2
+            }
+
+            .nn {
+                color: #268bd2
+            }
+
+            .cm {
+                color: #93a1a1;
+                font-style: italic
+            }
+
+            .nx {
+                color: #268bd2
+            }
+
+            .rt {
+                color: #268bd2
+            }
+
+            .ch {
+                color: #93a1a1;
+                font-style: italic
+            }
+
+            .se {
+                color: #2aa198
+            }
+
+            .ow {
+                color: #859900
+            }
+
+            .lntable {
+                color: #586e75
+            }
+
+            .kr {
+                color: #859900
+            }
+
+            .nb {
+                color: #cb4b16
+            }
+    </style>
+
+    <style>
+        /* User agent specific */
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        pre {
+            margin: 0;
+            padding: 0 12pt 4pt 0;
+        }
+
+        code {
+            display: inline;
+            margin: 0;
+        }
+
+        .bildigo-linenums-box {
+            margin: 0 5px;
+            flex: 0 1 auto;
+            font-family: monospace;
+            user-select: none;
+        }
+
+        .bildigo-scopeTriggers-box {
+            flex: 0 1 auto;
+            white-space: pre;
+            font-family: monospace;
+            user-select: none;
+        }
+
+        .bildigo-code-box {
+            flex: 1 1 auto;
+            white-space: pre;
+            font-family: monospace;
+        }
+
+        .linenums-container {
+            display: flex;
+            flex-flow: column nowrap;
+            text-align: right;
+        }
+
+        .linenums-box {
+            flex: 0 1 auto;
+        }
+
+        .scopeTriggers-container {
+            display: flex;
+            flex-flow: column nowrap;
+        }
+
+        .scopeTriggers-box {
+            flex: 0 1 auto;
+        }
+
+        /* Scopes */
+        code div {
+            display: inline;
+        }
+
+        .code div {
+            display: inline;
+        }
+
+        .usage-code div {
+            display: inline;
+        }
+
+        div.scope[open='true'] > .scope-summary {
+            display: none;
+        }
+
+        div.scope[open='false'] > .scope-content {
+            display: none;
+        }
+
+        .scope-toggle[open='true']::before {
+            content: '🔽';
+            display: inline-block;
+            line-height: 1em;
+        }
+
+        .scope-toggle[open='false']::before {
+            content: '▶️';
+            display: inline-block;
+            line-height: 1em;
+        }
+
+        .bildigo-svg-button {
+            color: var(--bildigo-text-color)
+        }
+
+        .sep.horizontal {
+            padding: 2px;
+        }
+
+        .sep.small {
+            padding: 1px;
+        }
+
+        .filetree {
+            padding: 10pt 0 10pt 0;
+            white-space: nowrap;
+            overflow-x: auto;
+            user-select: none;
+            height: 100%;
+        }
+
+        details.folder {
+            flex: 0 0 auto;
+        }
+
+            details.folder summary {
+                flex: 0 0 auto;
+            }
+
+            details.folder details.folder {
+                display: block;
+            }
+
+        .file {
+            margin-left: 10pt;
+            display: block;
+        }
+
+        details.folder summary:only-child::-webkit-details-marker {
+            color: transparent;
+        }
+
+        details.folder summary .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        details.folder summary {
+            cursor: pointer;
+        }
+
+        .file {
+            cursor: pointer;
+        }
+
+        .sticky {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        /* Links */
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        .link {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+            .tooltip > .tooltiptext {
+                visibility: hidden;
+                width: min-content;
+                border-radius: 6px;
+                padding: 5px 3px;
+                position: absolute;
+                z-index: 200;
+                bottom: 100%;
+                left: 10%;
+                margin-left: auto;
+                opacity: 0;
+                transition: opacity 0.3s;
+                color: var(--bildigo-text-color);
+                background-color: var(--bildigo-primary-color);
+                border: solid var(--bildigo-secondary-color);
+            }
+
+            .tooltip a {
+                cursor: pointer;
+            }
+
+        .code .tooltip:hover > .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .file-tab {
+            /*border: inset 2px lightGray;*/
+            display: flex;
+            padding: 8pt 12pt 8pt 12pt;
+            font-size: 16pt;
+            height: 19pt;
+        }
+
+        button {
+            background: transparent;
+            border: none;
+        }
+
+        .button-wrapper {
+            display: flex;
+            justify-content: right;
+        }
+
+        .bildigo-right-container {
+            /*padding: 30px 0 0 60px;*/
+            overflow-y: scroll;
+            overflow-x: scroll;
+            height: 100vh;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+        }
+
+            .bildigo-right-container:focus {
+                outline: none;
+            }
+
+        .bildigo-code-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* In text search*/
+        #search {
+            position: fixed;
+            top: 3.2em;
+            bottom: 0;
+            left: calc(50% - 22em);
+            width: 44em;
+            z-index: 1000;
+            pointer-events: none;
+            overflow-y: auto;
+        }
+
+        #search-form, #search-results {
+            box-shadow: 2px 2px 6px var(--bildigo-secondary-color);
+            pointer-events: all;
+        }
+
+            #search-form input {
+                font-size: 1.25em;
+                line-height: 2.3em;
+                height: 2.4em;
+                display: block;
+                box-sizing: border-box;
+                width: 100%;
+                margin: 0;
+                padding: 0 0.75em;
+                border: 0.05em solid var(--bildigo-secondary-color);
+            }
+
+        #search input:focus {
+            outline: none;
+        }
+
+        #search-results {
+            box-sizing: border-box;
+            border: 0.05em solid var(--bildigo-secondary-color);
+            background: var(--bildigo-primary-color);
+            padding: 8px;
+        }
+
+        #search-form input + #search-results {
+            border-top: none;
+            top: 3em;
+            max-height: calc(100% - 3em);
+        }
+
+        #search-results > ul {
+            margin: 0;
+            padding: 0;
+            color: var(--bildigo-text-color);
+            /*list-style: none;*/
+        }
+
+        /*#search-results > ul > li,*/
+        #search-results > p {
+            color: var(--bildigo-text-color);
+            margin: 0;
+        }
+
+        #search-results li a {
+            display: block;
+        }
+
+        /* Click background animation */
+        @keyframes target-bg-animation {
+            0% {
+                background: rgb(254, 211, 48);
+            }
+
+            100% {
+                background: none;
+            }
+        }
+
+        :target, .highlight-target {
+            animation: target-bg-animation 1.5s;
+            animation-timing-function: ease-in;
+        }
+
+        /* Info button */
+        .info-flex-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .info-menu-box {
+            /*background: var(--bildigo-primary-color);*/
+            border: 0.05em solid var(--bildigo-secondary-color);
+            border-radius: 6px;
+            margin-bottom: 0.2rem;
+        }
+
+            .info-menu-box button {
+                color: inherit;
+            }
+
+        /*.info-menu-box .info-menu-style:hover .info-style-list {*/
+        /*    display: block;*/
+        /*}*/
+
+        .info-style-list {
+            border: 0.05em solid var(--bildigo-secondary-color);
+            border-radius: 6px;
+            width: max-content;
+            position: absolute;
+            right: 100%;
+            bottom: 0;
+        }
+
+            .info-style-list ul {
+                margin: 0.4rem;
+                padding-left: 0;
+                list-style: none;
+            }
+
+                .info-style-list ul li::before {
+                    margin: 0;
+                    content: "●";
+                }
+
+        /* Info menu */
+
+        /* Misc */
+        .hidden {
+            display: none;
+        }
+
+        /* All layout containers */
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .upper-container {
+            height: 100vh;
+            overflow-y: hidden;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .file-container {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            width: 200pt;
+        }
+
+        .right-code-container {
+            overflow: hidden;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bottom-container {
+            flex: 1;
+            overflow: scroll;
+        }
+
+        .code {
+            margin: 0;
+            padding: 0 12pt 4pt 0;
+            display: block;
+            white-space: pre;
+            font-family: monospace;
+        }
+
+        .dragbar {
+            padding: 2px;
+        }
+
+            .dragbar.col {
+                cursor: col-resize;
+            }
+
+            .dragbar.row {
+                cursor: row-resize;
+            }
+
+        /* Decl/Usages */
+        .decl-usages {
+            padding: 16px;
+        }
+
+            .decl-usages h1, h2, h3, h4, h5, h6 {
+                margin: 8px 0 8px 0;
+            }
+
+            .decl-usages ul {
+                list-style-type: none;
+                margin: 8px 0 8px 0;
+                padding: 4px;
+            }
+
+        .usage-link-item {
+            padding-bottom: 4px;
+            padding-top: 4px;
+            display: flex;
+        }
+
+        .usage-line-num {
+            min-width: 36px;
+            padding-right: 10px;
+            font-family: monospace;
+            text-align: right;
+        }
+
+        .usage-code {
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+
+        .file-line {
+            display: flex;
+            margin-left: auto;
+            font-family: monospace;
+            padding-left: 4px;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        /* Markdown */
+        .markdown {
+            all: initial;
+            color: var(--bildigo-text-color);
+        }
+    </style>
+
+    <script>{ LANGUAGE_UTILS }</script>
+
+    <script type="text/javascript">
+        // Add load event listener.
+        window.addEventListener("load", loadTime, false);
+
+        function loadTime() {
+            // Get current time.
+            var now = new Date().getTime();
+            // Calculate page load time.
+            var page_load_time = now - performance.timing.navigationStart;
+            // Write the load time to the F12 console.
+            if (window.console) console.log(page_load_time);
+        }
+    </script>
+
+    <script>
+        let highlight = function (on) {
+            return function () {
+                let links = document.querySelectorAll('.code a');
+                for (let i = 0; i < links.length; i++) {
+                    let that = links[i];
+
+                    if (this.href !== that.href || that.href.endsWith('-nowhere')) {
+                        continue;
+                    }
+
+                    if (on) {
+                        that.classList.add("hover-highlight");
+                    } else {
+                        that.classList.remove("hover-highlight");
+                    }
+                }
+            }
+        };
+
+        let currentFile = ""
+
+        function fixIframe() {
+            if (window.top !== window.self) {
+                let links = document.getElementsByTagName('a');
+                for (let i = 0; i < links.length; i++) {
+                    if (links[i].getAttribute("href").charAt(0) === '#') {
+                        links[i].href = "about:srcdoc" + links[i].getAttribute("href")
+                    }
+                }
+            }
+        }
+
+        class File {
+            constructor(name, path, lineNums, scopeTriggers, scopes, codeLines, raw, fileType) {
+                this.name = name;
+                this.path = path;
+                this.lineNums = lineNums;
+                this.scopeTriggers = scopeTriggers;
+                this.scopes = scopes
+                this.codeLines = codeLines;
+                this.raw = raw;
+                this.type = fileType;
+            }
+        }
+
+        function fi(name, path, lineNums, scopeTriggers, scopes, codeLines, raw, fileType) {
+            return new File(name, path, lineNums, scopeTriggers, scopes, codeLines, raw, fileType)
+        }
+
+        function openDefaultFile() {
+            for (let key of Object.keys(files)) {
+                if (key.toLowerCase() === "readme.md") {
+                    window.location.hash = `#file:${key}`
+                }
+            }
+        }
+
+        const CSH = 0
+        const MD = 1
+
+        function openFile(id) {
+            if (id === currentFile || !(id in files)) {
+                return
+            }
+
+            // remove highlighting from the file
+            if (currentFile !== "") {
+                document.getElementById(currentFile).classList.remove("selected-file")
+            }
+
+            currentFile = id
+            let file = files[currentFile]
+            let currentFilePath = file.path
+            // add highlighting to the current file
+            document.getElementById(currentFile).classList.add("selected-file")
+            document.title = currentFilePath
+            document.getElementById("file-name").innerText = currentFilePath
+
+            let code = document.getElementById("main-code")
+            let scopes = document.getElementById("main-scopeTriggers-container")
+            let lineNums = document.getElementById("main-linenums-container")
+            code.innerHTML = ""
+            if (file.type === CSH) {
+                code.append(...file.codeLines.elements)
+                // code.innerHTML = file.codeLines.render//.join("\n")
+                scopes.innerHTML = ""
+                scopes.append(...file.scopeTriggers.elements)
+
+                // lineNums.innerHTML = file.lineNums
+                lineNums.innerHTML = ""
+                lineNums.append(...file.lineNums.elements)
+            } else if (file.type === MD) {
+                code.innerHTML = file.codeLines.join("\n")
+                scopes.innerHTML = file.scopeTriggers
+                lineNums.innerHTML = file.lineNums
+            }
+
+            // Open links on Ctrl + Click
+            document.querySelectorAll('.code a').forEach((element) =>
+                element.addEventListener('click', (evt) => handlerA(evt)))
+
+            let links = document.getElementsByTagName('a');
+            for (let i = 0; i < links.length; i++) {
+                links[i].onmouseover = highlight(true);
+                links[i].onmouseout = highlight(false);
+            }
+
+            let tooltipMouseOverListener = (span, data) => (evt) => {
+                if (span.innerHTML === "") {
+                    let id = data.split(":").slice(1).join(":")
+                    if (!(id in tooltips)) return
+
+                    span.append(..._collect(tooltips[id]).elements)
+
+                    if (data.split(":")[0] === "ent") {
+                        if (id in declInfo && declInfo[id].docs !== null) {
+                            span.append('\n\n')
+                            span.append(..._collect(declInfo[id].docs).elements)
+                        }
+                    }
+
+                    let spans = span.getElementsByClassName('tooltiptext')
+
+                    for (let i = 0; i < spans.length; i++) {
+                        let span0 = spans[i];
+                        span.parentNode.addEventListener(
+                            "mouseover", tooltipMouseOverListener(span0, span0.getAttribute("data-declid"))
+                        )
+                    }
+                }
+            }
+
+            let spans = document.getElementsByClassName('tooltiptext');
+            for (let i = 0; i < spans.length; i++) {
+                let data = spans[i].getAttribute('data-declid')
+                let span = spans[i]
+                span.parentNode.addEventListener(
+                    "mouseover", tooltipMouseOverListener(span, data)
+                )
+            }
+
+            document.querySelector('.bildigo-right-container').focus()
+            fixIframe()
+        }
+
+        function toggleScopeHandler(evt) {
+            if (evt.target.classList.contains('scope')) {
+                let scopeId = evt.target.id.substring(4)
+                files[currentFile].scopes[scopeId][2] = !files[currentFile].scopes[scopeId][2]
+                let isOpen = evt.target.getAttribute('open') === 'true'
+                toggleScopeAttr(evt.target)
+                toggleScopeAttr(document.querySelector('#scp-tgl-' + scopeId))
+                toggleScopeLines(files[currentFile].scopes[scopeId], isOpen)
+            }
+            if (evt.target.classList.contains('scope-toggle')) {
+                let scopeId = evt.target.id.substring(8)
+                files[currentFile].scopes[scopeId][2] = !files[currentFile].scopes[scopeId][2]
+                let isOpen = evt.target.getAttribute('open') === 'true'
+                toggleScopeAttr(evt.target)
+                toggleScopeAttr(document.querySelector('#scp-' + scopeId))
+                toggleScopeLines(files[currentFile].scopes[scopeId], isOpen)
+            }
+        }
+
+        function toggleScopeAttr(target) {
+            if (target.getAttribute('open') === 'true') {
+                target.setAttribute('open', 'false')
+            } else {
+                target.setAttribute('open', 'true')
+            }
+        }
+
+        function toggleScopeLines(lines, shouldClose) {
+            let closedLines = new Set()
+            for (const [, value] of Object.entries(files[currentFile].scopes)) {
+                if (value[2]) {
+                    for (let i = value[0] + 1; i <= value[1]; i++) {
+                        closedLines.add(i)
+                    }
+                }
+            }
+            for (let i = lines[0] + 1; i <= lines[1]; i++) {
+                if (shouldClose) {
+                    document.querySelector("#L" + i).classList.add("hidden")
+                    document.querySelector("#scp-ln-" + i).classList.add("hidden")
+                } else {
+                    if (closedLines.has(i)) {
+                        continue
+                    }
+                    document.querySelector("#L" + i).classList.remove("hidden")
+                    document.querySelector("#scp-ln-" + i).classList.remove("hidden")
+                }
+            }
+        }
+
+
+        // if collapse is true, collapse all scopes in the current file
+        // otherwise, expand all scopes
+        function toggleAllScopes(collapse) {
+            for (const [scopeId, value] of Object.entries(files[currentFile].scopes)) {
+                // change map value
+                value[2] = collapse
+                // toggle scope attributes
+                let scopeIcon = document.getElementById("scp-tgl-" + scopeId)
+                let scope = document.getElementById("scp-" + scopeId)
+                let attr = ""
+                if (collapse) {
+                    attr = "false"
+                } else {
+                    attr = "true"
+                }
+                scopeIcon.setAttribute("open", attr)
+                scope.setAttribute("open", attr)
+                // toggle scope lines
+                for (let i = value[0] + 1; i <= value[1]; i++) {
+                    if (collapse) {
+                        document.querySelector("#L" + i).classList.add("hidden")
+                        document.querySelector("#scp-ln-" + i).classList.add("hidden")
+                    } else {
+                        document.querySelector("#L" + i).classList.remove("hidden")
+                        document.querySelector("#scp-ln-" + i).classList.remove("hidden")
+                    }
+                }
+            }
+        }
+
+        function toggleInfoMenu() {
+            let infoMenu = document.querySelector('.info-menu-box')
+            infoMenu.classList.toggle('hidden')
+        }
+
+        function toggleStyleList() {
+            let list = document.querySelector('.info-style-list')
+            list.classList.toggle('hidden')
+        }
+
+        function changeActiveStyle(styleName) {
+            if (styleName in styleRegistry) {
+                document.head.querySelector('#code-css-style').outerHTML = styleRegistry[styleName]
+            }
+        }
+
+        function fillStyleList() {
+            let styleList = document.querySelector('.info-style-list ul')
+            let answer = ""
+            Object.keys(styleRegistry).sort().forEach((name) => {
+                answer += `<li><button onclick="changeActiveStyle('${name}')">${name}</button></li>\n`
+            })
+            styleList.innerHTML = answer
+        }
+
+        function closeInfoMenu(evt) {
+            let infoMenu = document.querySelector('.info-menu-box')
+            if (evt.target.closest('.info-flex-container') === null && !infoMenu.classList.contains('hidden')) {
+                infoMenu.classList.add('hidden')
+            }
+        }
+
+        function scrollIdIntoView(elemId) {
+            document.getElementById(elemId).scrollIntoView()
+            let wrapper = document.getElementById("main-code")
+            // scroll down a bit only if element on the top of the page
+            if (wrapper.scrollHeight - wrapper.scrollTop - wrapper.clientHeight > 1) {
+                wrapper.scrollBy(0, -document.querySelector('.sticky').scrollHeight / 2)
+            }
+        }
+
+        /**
+         * Highlights background of the element we interest in
+         * TODO: change entity id to start with `#ent:` so this will work automatically using :target
+         * @param {HTMLElement} element to be emphasized
+            */
+        function playTargetAnimation(element) {
+            clearAnimation(element)
+            // Start it again
+            element.classList.add('highlight-target')
+
+            // When animation finished - remove class
+            function callback() {
+                clearAnimation(element)
+            }
+            element.addEventListener("webkitAnimationEnd", callback, false);
+        }
+
+        function clearAnimation(element) {
+            element.classList.remove('highlight-target');
+            // Reset animation
+            element.style.animation = "none"
+            element.offsetHeight
+            element.style.animation = null
+        }
+
+        function handleHashChange() {
+            let code = document.getElementById('main-code');
+
+            if (location.hash !== '') {
+                let parts = location.hash.split("#")[1].split(":")
+                let mode = parts[0]
+
+                if (mode === "file") {
+                    openFile(parts.slice(1).join(":"))
+                } else if (mode === "ent") {
+                    let id = parts.slice(1).join(":")
+                    if (!(id in declInfo)) {
+                        return
+                    }
+                    let fileId = declInfo[id].fileId
+                    if (fileId == null) return
+                    openFile(fileId)
+                    scrollIdIntoView(id)
+                    playTargetAnimation(document.getElementById(id))
+                } else if (mode === "line") {
+                    let fileId = parts.slice(2).join(':')
+                    let lineId = parts[1]
+
+                    openFile(fileId)
+                    scrollIdIntoView(lineId)
+                    navigateToFile(fileId)
+                    document.querySelector('#search').classList.add('hidden')
+                    document.querySelector('.bildigo-right-container').focus()
+                    playTargetAnimation(document.getElementById(lineId))
+                } else if (mode === "usg") {
+                    let usgId = parts[1]
+                    let fileId = entityInfo[usgId].file
+
+                    openFile(fileId)
+                    scrollIdIntoView(usgId)
+                    playTargetAnimation(document.getElementById(usgId))
+                } else {
+                    scrollIdIntoView(mode)
+                }
+            } else {
+                openDefaultFile()
+            }
+        }
+
+        function toggleSearchView(evt) {
+            if (evt.key === "Escape" || evt.key === "Esc") {
+                if (!document.querySelector('#search').classList.contains('hidden')) {
+                    showSearch(false)
+                    document.querySelector('.bildigo-right-container').focus()
+                }
+            }
+            if ((evt.ctrlKey || evt.metaKey) && (evt.key === 'f' || evt.key === 'F')) {
+                if (document.querySelector('#search').classList.contains('hidden')) {
+                    showSearch(true)
+                }
+                evt.preventDefault()
+            }
+        }
+
+        let searchIndex = {}
+
+        function buildIndex() {
+            for (const key in files) {
+                const value = files[key]
+                searchIndex[key] = value.raw.split("\n")
+            }
+        }
+
+        function showSearch(show) {
+            let elem = document.querySelector('#search')
+            if (show) {
+                elem.classList.remove('hidden')
+                elem.querySelector('input').focus()
+            } else {
+                elem.classList.add('hidden')
+            }
+        }
+
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function searchStringInIndex(query) {
+            let answer = []
+            for (const filepath in searchIndex) {
+                const content = searchIndex[filepath]
+                for (let line = 0; line < content.length; line += 1) {
+                    if (content[line].toLowerCase().includes(query.toLowerCase())) {
+                        answer.push([filepath, line + 1, content[line]])
+                    }
+                    if (answer.length > 15) {
+                        break
+                    }
+                }
+                if (answer.length > 15) {
+                    break
+                }
+            }
+            let result = document.createElement("ul")
+            for (const value of answer) {
+                let a = elementFromString(`<a href="#line:L${value[1]}:${value[0]}"></a>`)
+                let li = document.createElement("li")
+                li.appendChild(a)
+                result.appendChild(lineHtml({ fileId: value[0], line: value[1], parent: a, withFileName: true }))
+                // result.appendChild(elementFromString(`<li><a href="#line:L${value[1]}:${value[0]}">${escapeHtml(value[2])}</a></li>`))
+                // result += `<li><a href="#line:L${value[1]}:${value[0]}">${escapeHtml(value[2])}</a></li>`
+            }
+            return result.childNodes
+        }
+
+        // change tag <a> default behaviour to react on Ctrl+click
+        function handlerA(ev) {
+            ev.preventDefault()
+            if (ev.ctrlKey || ev.metaKey) {
+                window.open(ev.target.href, ev.target.getAttribute('target') || "_self")
+            } else {
+                let id = ev.target.getAttribute("href").split(":").slice(1).join(":")
+                document.getElementById("bottom-container").innerHTML = ""
+                if (id in declInfo) {
+                    document.getElementById("bottom-container").appendChild(generateDeclUsages(id))
+                    toggleBottomPanel(true)
+                }
+            }
+        }
+
+        // navigate to current opened file in the filetree
+        function navigateToFile(targetFile) {
+            if (targetFile !== "") {
+                let file = document.getElementById(targetFile)
+                let filetree = document.getElementById("filetree")
+                let folder = file.parentElement
+                while (folder !== filetree) {
+                    if (folder.tagName === "DETAILS") {
+                        folder.setAttribute("open", "true")
+                    }
+                    folder = folder.parentElement
+                }
+                playTargetAnimation(file)
+                scrollIdIntoView(targetFile)
+            }
+        }
+
+        function toggleBottomPanel(force = null) {
+            let upperContainer = document.getElementById("upper-container")
+            let bottomContainer = document.getElementById("bottom-container")
+
+            let toOpen
+            if (bottomContainer.offsetHeight <= 20) {
+                toOpen = force !== false;
+            } else {
+                if (force === true) toOpen = null
+                else toOpen = false
+            }
+
+            if (toOpen === true) upperContainer.style.height = `${window.innerHeight - 300}px`
+            else if (toOpen === false) upperContainer.style.height = "0px"
+        }
+
+        class EntityInfo {
+            constructor(file, id, line, declId) {
+                this.file = file;
+                this.id = id;
+                this.line = line;
+                this.declId = declId;
+            }
+        }
+
+        class DeclInfo {
+            constructor(id, fileId, name, declId, usages, docs) {
+                this.eid = id;
+                this.fileId = fileId;
+                this.name = name;
+                this.declId = declId;
+                this.usages = usages;
+                this.docs = docs;
+            }
+        }
+
+        function ei(file, id, line, declId) {
+            return new EntityInfo(file, id, line, declId)
+        }
+
+        function di(id, fileId, name, declId, usages, docs) {
+            return new DeclInfo(id, fileId, name, declId, usages, docs)
+        }
+
+        function elementFromString(str) {
+            const placeholder = document.createElement("div");
+            placeholder.innerHTML = str;
+            return placeholder.firstElementChild
+        }
+
+        function elementsFromString(str) {
+            const placeholder = document.createElement("div");
+            placeholder.innerHTML = str;
+            let spans = placeholder.getElementsByTagName('span')
+            let result = []
+            // Filtering out tooltips
+            for (let s of spans) {
+                if (s.className != "tooltiptext")
+                    result.push(s);
+            }
+            return result
+        }
+
+        function lineHtml({ line = null, parent = null, withFileName = false, fileId = null, file = null } = {}) {
+            if (line === null) throw "Line must not be null"
+            if (fileId === null && file === null) throw "Either file or fileId should not be null"
+
+            if (file === null) {
+                if (!(fileId in files)) throw "fileId is incorrect"
+                file = files[fileId]
+            }
+
+            let el
+            if (withFileName) {
+                el = elementFromString(`<div class="usage-link-item"><div class="usage-code"></div><div class="file-line"><div>${file.name}</div><div class="usage-line-num">${line}</div></div></div>`)
+            } else {
+                el = elementFromString(`<div class="usage-link-item"><div class="usage-line-num">${line}</div><div class="usage-code"></div></div>`)
+            }
+
+            // Skipping leading trivia
+            let filteredCode = []
+            let skipped = false
+            for (let c of elementsFromString(file.codeLines.lines[line - 1].trim())) {
+                if (c.innerHTML.replace(/ /g, '').replace(/[\r\n\t]/gm, '') != "" || skipped) {
+                    filteredCode.push(c)
+                    skipped = true
+                }
+            }
+            let code = el.getElementsByClassName("usage-code")[0]
+            code.append(...filteredCode)
+            for (let a of code.getElementsByTagName("a")) {
+                a.removeAttribute("href")
+            }
+
+            if (parent !== null) {
+                parent.appendChild(el)
+                return parent
+            }
+            return el
+        }
+
+        function usageEntityLineHtml(entity) {
+            let file = files[entity.file]
+
+            let li = document.createElement("li")
+            let a = elementFromString(`<a href="#usg:${entity.id}"></a>`)
+            li.appendChild(lineHtml({ line: entity.line, file: file, parent: a }))
+
+            return li
+        }
+
+        function generateDeclUsages(declId) {
+            let answer = { "decl": declInfo[declId], "usages": {} }
+
+            let lineSet = new Set()
+            for (let usageId of answer["decl"].usages) {
+                let e = entityInfo[usageId]
+                if (lineSet.has(e.file + e.line)) {
+                    continue
+                }
+                if (e.file in answer["usages"]) {
+                    answer["usages"][e.file].push(e)
+                } else {
+                    answer["usages"][e.file] = [e]
+                }
+
+                lineSet.add(e.file + e.line)
+            }
+
+            let result = elementFromString(`<div class="decl-usages"></div>`)
+            if (answer["decl"].eid !== null) {
+                result.insertAdjacentHTML("beforeend", `<h3>Declaration of <a href="#ent:${answer["decl"].declId}">${answer["decl"].name}</a></h3>`)
+                let ul = document.createElement("ul")
+                ul.appendChild(usageEntityLineHtml(entityInfo[answer["decl"].eid]))
+                ul.querySelector("a").setAttribute("href", `#ent:${declId}`)
+                let file = files[entityInfo[answer["decl"].eid].file].path
+                let fileNameH = elementFromString(`<a><h4>${file}</h4></a>`)
+                fileNameH.addEventListener("click", _ => navigateToFile(file))
+                result.appendChild(fileNameH)
+                result.appendChild(ul)
+            }
+
+            result.insertAdjacentHTML("beforeend", `<h3>Usages of <a href="#ent:${answer["decl"].declId}">${answer["decl"].name}</a></h3>`)
+            for (const [f, usages] of Object.entries(answer["usages"])) {
+                let file = files[f].path
+                let fileNameH = elementFromString(`<a><h4>${file}</h4></a>`)
+                fileNameH.addEventListener("click", _ => navigateToFile(file))
+                result.appendChild(fileNameH)
+
+                let ul = document.createElement("ul")
+                let sortedUsages = usages.sort((a, b) => a.line - b.line)
+                for (let usage of sortedUsages) {
+                    ul.appendChild(usageEntityLineHtml(usage))//`<li><a href="#usg:i${usage.id}:${usage.file}">${usage.file}:${usage.line}</a></li>`
+                }
+                result.appendChild(ul)
+            }
+
+
+            let links = result.getElementsByTagName('a');
+            for (let i = 0; i < links.length; i++) {
+                links[i].onmouseover = highlight(true);
+                links[i].onmouseout = highlight(false);
+            }
+            return result
+        }
+
+        window.onload = function () {
+            buildIndex()
+            fixIframe()
+            fillStyleList()
+
+            let links = document.getElementsByTagName('a')
+            for (let i = 0; i < links.length; i++) {
+                links[i].onmouseover = highlight(true)
+                links[i].onmouseout = highlight(false)
+            }
+
+
+            document.addEventListener('click', closeInfoMenu)
+            document.getElementById("main-bildigo-code-container").addEventListener('click', toggleScopeHandler)
+            // expand/collapse scopes on input button click
+            document.getElementById("scopes-expand").addEventListener("click", function () {
+                toggleAllScopes(false)
+            });
+            document.getElementById("scopes-collapse").addEventListener("click", function () {
+                toggleAllScopes(true)
+            });
+            // expand/collapse scopes on "+"("=")/"-"
+            document.addEventListener('keypress', function (e) {
+                if (e.key === "=" || e.key === "+") {
+                    toggleAllScopes(false)
+                } else if (e.key === "-") {
+                    toggleAllScopes(true)
+                }
+            })
+
+            document.querySelector('.bildigo-right-container').addEventListener('keydown', toggleSearchView)
+            document.querySelector('#search').addEventListener('keydown', toggleSearchView)
+            document.querySelector('#search input').addEventListener('input', (evt) => {
+                let query = evt.target.value
+                const description = document.querySelector('#search-description')
+                const resultList = document.querySelector('#search-results-list')
+                if (query === "") {
+                    description.classList.remove('hidden')
+                    resultList.classList.add('hidden')
+                } else {
+                    resultList.innerHTML = ""
+                    resultList.append(...searchStringInIndex(query))
+                    description.classList.add('hidden')
+                    resultList.classList.remove('hidden')
+                }
+            })
+
+            // expand/collapse filetree on button click
+            let filetreeDetails = document.getElementsByClassName("filetree")[0].getElementsByTagName("details")
+            document.getElementById("filetree-expand").addEventListener("click", function () {
+                for (let i = 0; i < filetreeDetails.length; ++i) {
+                    filetreeDetails[i].setAttribute("open", "true")
+                }
+            });
+            document.getElementById("filetree-collapse").addEventListener("click", function () {
+                for (let i = 0; i < filetreeDetails.length; ++i) {
+                    filetreeDetails[i].removeAttribute("open")
+                }
+            });
+
+            let dragbars = document.getElementsByClassName("dragbar")
+
+            let drag = (dragbar, toMove, row) => (e) => {
+                document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
+                if (row) {
+                    toMove.style.height = (e.pageY - dragbar.offsetHeight / 2) + 'px'
+
+                } else {
+                    toMove.style.width = (e.pageX - dragbar.offsetWidth / 2) + 'px'
+                }
+            }
+
+            for (let dragbar of dragbars) {
+                let id = dragbar.getAttribute("data-rel")
+                let toMove = document.getElementById(id)
+                let row = dragbar.classList.contains("row")
+
+                const listener = drag(dragbar, toMove, row)
+
+                dragbar.addEventListener('mousedown', () => {
+                    document.addEventListener('mousemove', listener);
+                })
+
+                dragbar.addEventListener('mouseup', () => {
+                    document.removeEventListener('mousemove', listener);
+                });
+            }
+
+            window.addEventListener('hashchange', handleHashChange, false);
+            handleHashChange()
+        }
+    </script>
+</head>
+<body class="bg">
+    <script>
+        let styleRegistry = {
+            "empty": `<style id="code-css-style"> :root {--bildigo-primary-color: #f7f7f7} :root {--bildigo-secondary-color: #999999} :root {--bildigo-text-color: #-00001} a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {background-color: #cccccc} .nb {} .se {} .ow {} .lntable {} .kr {} .gt {} .gl {} .cl {} .sep {background-color: #b2b2b2} .sb {} .si {} .s1 {} .gd {} .lnt {color: #7f7f7f} .vc {} .file-tab, .selected-file {background-color: #f2f2f2} .x {} .kt {} .ne {} .fm {} .nl {} .ln {color: #7f7f7f} . {} .gu {} .l {} .mb {} .py {} .vm {} .mi {} .mo {} .cp {} .cpf {} .w {} .k {} .sc {} .il {} .c {} .c1 {} .kn {} .ld {} .sx {} .gi {} .gs {} .kp {} .na {} .sh {} .hl {background-color: #e5e5e5} .nf {} .mf {} .s {} .ss {} .nc {} .no {} .m {} .o {} .p {} .kc {} .bp {} .cs {} .gh {} .gp {} .kd {} .dl {} .nv {} .ge {} .gr {} .err {} .nd {} .s2 {} .bg {} .sd {} .vg {} .vi {} .sr {} .mh {} .lntd {} .ni {} .nn {} .nt {} .sa {} .g {} .go {} .line {} .n {} .ch {} .cm {} .nx {} .rt {} </style> `,
+            "pygments": `<style id="code-css-style"> :root {--bildigo-primary-color: #f7f7f7} :root {--bildigo-secondary-color: #999999} :root {--bildigo-text-color: #-00001} a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {background-color: #cccccc} .kd {color: #008000; font-weight: bold} .dl {color: #ba2121} .cs {color: #408080; font-style: italic} .gh {color: #000080; font-weight: bold} .gp {color: #000080; font-weight: bold} .err {} .nd {color: #aa22ff} .nv {color: #19177c} .ge {font-style: italic} .gr {color: #ff0000} .bg {} .sd {color: #ba2121; font-style: italic} .s2 {color: #ba2121} .lntd {} .ni {color: #999999; font-weight: bold} .vg {} .vi {} .sr {color: #bb6688} .mh {color: #666666} .line {} .n {} .nn {color: #0000ff; font-weight: bold} .nt {color: #008000; font-weight: bold} .sa {color: #ba2121} .g {} .go {color: #888888} .nx {} .rt {} .ch {color: #408080; font-style: italic} .cm {color: #408080; font-style: italic} .lntable {} .kr {color: #008000; font-weight: bold} .nb {color: #008000} .se {color: #bb6622; font-weight: bold} .ow {color: #aa22ff; font-weight: bold} .cl {} .sep {background-color: #b2b2b2} .gt {color: #0044dd} .gl {text-decoration: underline} .lnt {color: #7f7f7f} .vc {} .sb {color: #ba2121} .si {color: #bb6688; font-weight: bold} .s1 {color: #ba2121} .gd {color: #a00000} .ln {color: #7f7f7f} . {} .file-tab, .selected-file {background-color: #f2f2f2} .x {} .kt {color: #b00040} .ne {color: #d2413a; font-weight: bold} .fm {} .nl {color: #a0a000} .l {} .mb {color: #666666} .gu {color: #800080; font-weight: bold} .w {color: #bbbbbb} .k {color: #008000; font-weight: bold} .py {} .vm {} .mi {color: #666666} .mo {color: #666666} .cp {color: #bc7a00} .cpf {color: #bc7a00} .kn {color: #008000; font-weight: bold} .ld {} .sc {color: #ba2121} .il {color: #666666} .c {color: #408080; font-style: italic} .c1 {color: #408080; font-style: italic} .kp {color: #008000} .na {color: #7d9029} .sx {color: #008000} .gi {color: #00a000} .gs {font-weight: bold} .hl {background-color: #e5e5e5} .nf {color: #0000ff} .sh {color: #ba2121} .s {color: #ba2121} .ss {color: #19177c} .mf {color: #666666} .kc {color: #008000; font-weight: bold} .bp {} .nc {color: #0000ff; font-weight: bold} .no {color: #880000} .m {color: #666666} .o {color: #666666} .p {} </style> `,
+            "rrt": `<style id="code-css-style"> :root {--bildigo-primary-color: #070707} :root {--bildigo-secondary-color: #666666} :root {--bildigo-text-color: #-00001} a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {background-color: #333333} .c1 {color: #00ff00} .kn {color: #ff0000} .ld {} .sc {color: #87ceeb} .il {color: #ff6600} .c {color: #00ff00} .kp {color: #ff0000} .na {} .sx {color: #87ceeb} .gi {} .gs {} .hl {background-color: #191919} .nf {color: #ffff00} .sh {color: #87ceeb} .s {color: #87ceeb} .ss {color: #ff6600} .mf {color: #ff6600} .o {} .p {} .kc {color: #ff0000} .bp {} .nc {} .no {color: #7fffd4} .m {color: #ff6600} .kd {color: #ff0000} .dl {color: #87ceeb} .cs {color: #00ff00} .gh {} .gp {} .err {} .nd {} .nv {color: #eedd82} .ge {} .gr {} .bg {color: #f8f8f2; background-color: #000000} .sd {color: #87ceeb} .s2 {color: #87ceeb} .mh {color: #ff6600} .lntd {} .ni {} .vg {} .vi {} .sr {color: #87ceeb} .g {} .go {} .line {} .n {} .nn {} .nt {} .sa {color: #87ceeb} .nx {} .rt {} .ch {color: #00ff00} .cm {color: #00ff00} .lntable {} .kr {color: #ff0000} .nb {} .se {color: #87ceeb} .ow {} .cl {} .sep {background-color: #4c4c4c} .gt {} .gl {} .gd {} .lnt {color: #7c7c79} .vc {} .sb {color: #87ceeb} .si {color: #87ceeb} .s1 {color: #87ceeb} .ne {} .fm {} .nl {} .ln {color: #7c7c79} . {} .file-tab, .selected-file {background-color: #0c0c0c} .x {} .kt {color: #ee82ee} .l {} .mb {color: #ff6600} .gu {} .mo {color: #ff6600} .cp {color: #e5e5e5} .cpf {color: #e5e5e5} .w {} .k {color: #ff0000} .py {} .vm {} .mi {color: #ff6600} </style> `,
+            "solarized-dark": `<style id="code-css-style"> :root {--bildigo-primary-color: #07313c} :root {--bildigo-secondary-color: #667f86} :root {--bildigo-text-color: #-00001} a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {background-color: #33555e} .o {color: #719e07} .p {} .kc {color: #cb4b16} .bp {color: #268bd2} .nc {color: #268bd2} .no {color: #cb4b16} .m {color: #2aa198} .kd {color: #268bd2} .dl {color: #2aa198} .cs {color: #719e07} .gh {color: #cb4b16} .gp {} .err {} .nd {color: #268bd2} .nv {color: #268bd2} .ge {font-style: italic} .gr {color: #dc322f; font-weight: bold} .bg {color: #93a1a1; background-color: #002b36} .sd {color: #93a1a1} .s2 {color: #2aa198} .mh {color: #2aa198} .lntd {} .ni {color: #cb4b16} .vg {} .vi {} .sr {color: #dc322f} .g {} .go {} .line {} .n {} .nn {} .nt {color: #268bd2} .sa {color: #2aa198} .nx {} .rt {} .ch {color: #586e75} .cm {color: #586e75} .lntable {} .kr {color: #268bd2} .nb {color: #b58900} .se {color: #cb4b16} .ow {color: #719e07} .cl {} .sep {background-color: #4c6a72} .gt {} .gl {} .gd {color: #dc322f} .lnt {color: #495050} .vc {} .sb {color: #586e75} .si {color: #2aa198} .s1 {color: #2aa198} .ne {color: #cb4b16} .fm {} .nl {} .ln {color: #495050} . {} .file-tab, .selected-file {background-color: #0c3540} .x {color: #cb4b16} .kt {color: #dc322f} .l {} .mb {color: #2aa198} .gu {color: #268bd2} .mo {color: #2aa198} .cp {color: #719e07} .cpf {color: #719e07} .w {} .k {color: #719e07} .py {} .vm {} .mi {color: #2aa198} .c1 {color: #586e75} .kn {color: #719e07} .ld {} .sc {color: #2aa198} .il {color: #2aa198} .c {color: #586e75} .kp {color: #719e07} .na {color: #93a1a1} .sx {color: #2aa198} .gi {color: #719e07} .gs {font-weight: bold} .hl {background-color: #19404a} .nf {color: #268bd2} .sh {color: #93a1a1} .s {color: #2aa198} .ss {color: #2aa198} .mf {color: #2aa198} </style> `,
+            "bildigo": `<style id="code-css-style"> :root {color: #f8f8f2; --bildigo-text-color: #f8f8f2} a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {color: #f8f8f2; background-color: #52534e} :root {color: #f8f8f2; --bildigo-primary-color: #2d2e28} :root {color: #f8f8f2; --bildigo-secondary-color: #7d7e7a} .err {color: #960050; background-color: #1e0010} .nd {color: #a6e22e} .nv {color: #005cee} .ge {color: #f8f8f2; font-style: italic} .gr {color: #f8f8f2} .bg {color: #f8f8f2; background-color: #272822} .sd {color: #e6db74} .s2 {color: #e6db74} .lntd {color: #f8f8f2} .ni {color: #f8f8f2} .vg {color: #f8f8f2; font-style: italic} .vi {color: #f8f8f2} .sr {color: #e6db74} .mh {color: #0000ff} .line {color: #f8f8f2} .n {color: #f8f8f2} .nn {color: #5f9ea0} .nt {color: #f92672} .sa {color: #e6db74} .g {color: #f8f8f2} .go {color: #f8f8f2} .nx {color: #a6e22e} .rt {color: #ff0000} .ch {color: #75715e} .cm {color: #75715e} .lntable {color: #f8f8f2} .kr {color: #66d9ef} .nb {color: #008000} .se {color: #ae81ff} .ow {color: #f92672} .cl {color: #f8f8f2} .sep {color: #f8f8f2; background-color: #676864} .gt {color: #f8f8f2} .gl {color: #f8f8f2} .lnt {color: #7f7f7f} .vc {color: #f8f8f2} .sb {color: #e6db74} .si {color: #e6db74} .s1 {color: #e6db74} .gd {color: #f92672} .ln {color: #7f7f7f} . {color: #f8f8f2} .file-tab, .selected-file {color: #f8f8f2; background-color: #31322d} .x {color: #f8f8f2} .kt {color: #b00040} .ne {color: #a6e22e} .fm {color: #f8f8f2} .nl {color: #f8f8f2} .l {color: #ae81ff} .mb {color: #ae8900} .gu {color: #75715e} .w {color: #f8f8f2} .k {color: #66d9ef} .py {color: #f8f8f2} .vm {color: #f8f8f2} .mi {color: #ae81ff} .mo {color: #ae00ff} .cp {color: #75715e} .cpf {color: #75715e} .kn {color: #f92672} .ld {color: #e6db74} .sc {color: #e6db00} .il {color: #ae81ff} .c {color: #75715e} .c1 {color: #75715e} .kp {color: #66d9ef} .na {color: #a6e22e; text-decoration: underline} .sx {color: #e6db74} .gi {color: #a6e22e} .gs {color: #f8f8f2; font-weight: bold} .hl {color: #f8f8f2; background-color: #3c3d38} .nf {color: #a6e22e} .sh {color: #e6db74} .s {color: #e6db74} .ss {color: #e6db74} .mf {color: #0054ff} .kc {color: #66d9ef} .bp {color: #f8f8f2} .nc {color: #a600fa} .no {color: #66d9ef} .m {color: #ae81ff} .o {color: #f92672} .p {color: #f8f8f2} .kd {color: #66d9ef} .dl {color: #e6db74} .cs {color: #75715e} .gh {color: #f8f8f2} .gp {color: #f8f8f2} </style> `,
+            "bw": `<style id="code-css-style"> :root {--bildigo-primary-color: #f7f7f7} :root {--bildigo-secondary-color: #999999} :root {--bildigo-text-color: #-00001} a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {background-color: #cccccc} .kd {font-weight: bold} .dl {font-style: italic} .cs {font-style: italic} .gh {font-weight: bold} .gp {font-weight: bold} .err {} .nd {} .nv {} .ge {font-style: italic} .gr {} .bg {background-color: #ffffff} .sd {font-style: italic} .s2 {font-style: italic} .mh {} .lntd {} .ni {font-weight: bold} .vg {} .vi {} .sr {font-style: italic} .g {} .go {} .line {} .n {} .nn {font-weight: bold} .nt {font-weight: bold} .sa {font-style: italic} .nx {} .rt {} .ch {font-style: italic} .cm {font-style: italic} .lntable {} .kr {font-weight: bold} .nb {} .se {font-weight: bold; font-style: italic} .ow {font-weight: bold} .cl {} .sep {background-color: #b2b2b2} .gt {} .gl {} .gd {} .lnt {color: #7f7f7f} .vc {} .sb {font-style: italic} .si {font-weight: bold; font-style: italic} .s1 {font-style: italic} .ne {font-weight: bold} .fm {} .nl {} .ln {color: #7f7f7f} . {} .file-tab, .selected-file {background-color: #f2f2f2} .x {} .kt {} .l {} .mb {} .gu {font-weight: bold} .mo {} .cp {} .cpf {} .w {} .k {font-weight: bold} .py {} .vm {} .mi {} .c1 {font-style: italic} .kn {font-weight: bold} .ld {} .sc {font-style: italic} .il {} .c {font-style: italic} .kp {} .na {} .sx {font-style: italic} .gi {} .gs {font-weight: bold} .hl {background-color: #e5e5e5} .nf {} .sh {font-style: italic} .s {font-style: italic} .ss {font-style: italic} .mf {} .o {} .p {} .kc {font-weight: bold} .bp {} .nc {font-weight: bold} .no {} .m {} </style> `,
+            "github": `<style id="code-css-style"> :root {--bildigo-primary-color: #f7f7f7} :root {--bildigo-secondary-color: #999999} :root {--bildigo-text-color: #-00001} a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {background-color: #cccccc} .nt {color: #000080} .sa {color: #dd1144} .g {} .go {color: #888888} .line {} .n {} .nn {color: #555555} .cm {color: #999988; font-style: italic} .nx {} .rt {} .ch {color: #999988; font-style: italic} .se {color: #dd1144} .ow {color: #000000; font-weight: bold} .lntable {} .kr {color: #000000; font-weight: bold} .nb {color: #0086b3} .gl {text-decoration: underline} .cl {} .sep {background-color: #b2b2b2} .gt {color: #aa0000} .si {color: #dd1144} .s1 {color: #dd1144} .gd {color: #000000; background-color: #ffdddd} .lnt {color: #7f7f7f} .vc {color: #008080} .sb {color: #dd1144} .x {} .kt {color: #445588; font-weight: bold} .ne {color: #990000; font-weight: bold} .fm {} .nl {color: #990000; font-weight: bold} .ln {color: #7f7f7f} . {} .file-tab, .selected-file {background-color: #f2f2f2} .l {} .mb {color: #009999} .gu {color: #aaaaaa} .vm {} .mi {color: #009999} .mo {color: #009999} .cp {color: #999999; font-weight: bold; font-style: italic} .cpf {color: #999999; font-weight: bold; font-style: italic} .w {color: #bbbbbb} .k {color: #000000; font-weight: bold} .py {} .il {color: #009999} .c {color: #999988; font-style: italic} .c1 {color: #999988; font-style: italic} .kn {color: #000000; font-weight: bold} .ld {} .sc {color: #dd1144} .gi {color: #000000; background-color: #ddffdd} .gs {font-weight: bold} .kp {color: #000000; font-weight: bold} .na {color: #008080} .sx {color: #dd1144} .hl {background-color: #e5e5e5} .nf {color: #990000; font-weight: bold} .sh {color: #dd1144} .s {color: #dd1144} .ss {color: #990073} .mf {color: #009999} .no {color: #008080} .m {color: #009999} .o {color: #000000; font-weight: bold} .p {} .kc {color: #000000; font-weight: bold} .bp {color: #999999} .nc {color: #445588; font-weight: bold} .gh {color: #999999} .gp {color: #555555} .kd {color: #000000; font-weight: bold} .dl {color: #dd1144} .cs {color: #999999; font-weight: bold; font-style: italic} .ge {color: #000000; font-style: italic} .gr {color: #aa0000} .err {color: #a61717; background-color: #e3d2d2} .nd {color: #3c5d5d; font-weight: bold} .nv {color: #008080} .bg {background-color: #ffffff} .sd {color: #dd1144} .s2 {color: #dd1144} .vi {color: #008080} .sr {color: #009926} .mh {color: #009999} .lntd {} .ni {color: #800080} .vg {color: #008080} </style> `,
+            "monokai": `<style id="code-css-style"> :root {color: #f8f8f2; --bildigo-secondary-color: #7d7e7a} :root {color: #f8f8f2; --bildigo-text-color: #f8f8f2} a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {color: #f8f8f2; background-color: #52534e} :root {color: #f8f8f2; --bildigo-primary-color: #2d2e28} .lntable {color: #f8f8f2} .kr {color: #66d9ef} .nb {color: #f8f8f2} .se {color: #ae81ff} .ow {color: #f92672} .cl {color: #f8f8f2} .sep {color: #f8f8f2; background-color: #676864} .gt {color: #f8f8f2} .gl {color: #f8f8f2} .lnt {color: #7f7f7f} .vc {color: #f8f8f2} .sb {color: #e6db74} .si {color: #e6db74} .s1 {color: #e6db74} .gd {color: #f92672} .nl {color: #f8f8f2} .ln {color: #7f7f7f} . {color: #f8f8f2} .file-tab, .selected-file {color: #f8f8f2; background-color: #31322d} .x {color: #f8f8f2} .kt {color: #66d9ef} .ne {color: #a6e22e} .fm {color: #f8f8f2} .l {color: #ae81ff} .mb {color: #ae81ff} .gu {color: #75715e} .cpf {color: #75715e} .w {color: #f8f8f2} .k {color: #66d9ef} .py {color: #f8f8f2} .vm {color: #f8f8f2} .mi {color: #ae81ff} .mo {color: #ae81ff} .cp {color: #75715e} .kn {color: #f92672} .ld {color: #e6db74} .sc {color: #e6db74} .il {color: #ae81ff} .c {color: #75715e} .c1 {color: #75715e} .kp {color: #66d9ef} .na {color: #a6e22e} .sx {color: #e6db74} .gi {color: #a6e22e} .gs {color: #f8f8f2; font-weight: bold} .hl {color: #f8f8f2; background-color: #3c3d38} .nf {color: #a6e22e} .sh {color: #e6db74} .s {color: #e6db74} .ss {color: #e6db74} .mf {color: #ae81ff} .kc {color: #66d9ef} .bp {color: #f8f8f2} .nc {color: #a6e22e} .no {color: #66d9ef} .m {color: #ae81ff} .o {color: #f92672} .p {color: #f8f8f2} .kd {color: #66d9ef} .dl {color: #e6db74} .cs {color: #75715e} .gh {color: #f8f8f2} .gp {color: #f8f8f2} .err {color: #960050; background-color: #1e0010} .nd {color: #a6e22e} .nv {color: #f8f8f2} .ge {color: #f8f8f2; font-style: italic} .gr {color: #f8f8f2} .bg {color: #f8f8f2; background-color: #272822} .sd {color: #e6db74} .s2 {color: #e6db74} .lntd {color: #f8f8f2} .ni {color: #f8f8f2} .vg {color: #f8f8f2} .vi {color: #f8f8f2} .sr {color: #e6db74} .mh {color: #ae81ff} .line {color: #f8f8f2} .n {color: #f8f8f2} .nn {color: #f8f8f2} .nt {color: #f92672} .sa {color: #e6db74} .g {color: #f8f8f2} .go {color: #f8f8f2} .nx {color: #a6e22e} .rt {color: #f8f8f2} .ch {color: #75715e} .cm {color: #75715e} </style> `,
+            "solarized-light": `<style id="code-css-style"> :root {color: #586e75; --bildigo-secondary-color: #8e8b7f} :root {color: #586e75; --bildigo-text-color: #586e75} a:hover, a:hover *, a.hover-highlight, .file:hover, details.folder summary:hover {color: #586e75; background-color: #beb9aa} :root {color: #586e75; --bildigo-primary-color: #e6e1ce} .err {color: #586e75} .nd {color: #268bd2} .nv {color: #268bd2} .ge {color: #d33682} .gr {color: #d33682} .bg {color: #586e75; background-color: #eee8d5} .sd {color: #2aa198} .s2 {color: #2aa198} .mh {color: #2aa198; font-weight: bold} .lntd {color: #586e75} .ni {color: #268bd2} .vg {color: #268bd2} .vi {color: #268bd2} .sr {color: #2aa198} .g {color: #d33682} .go {color: #d33682} .line {color: #586e75} .n {color: #268bd2} .nn {color: #268bd2} .nt {color: #268bd2; font-weight: bold} .sa {color: #2aa198} .nx {color: #268bd2} .rt {color: #268bd2} .ch {color: #93a1a1; font-style: italic} .cm {color: #93a1a1; font-style: italic} .lntable {color: #586e75} .kr {color: #859900} .nb {color: #cb4b16} .se {color: #2aa198} .ow {color: #859900} .cl {color: #586e75} .sep {color: #586e75; background-color: #a6a295} .gt {color: #d33682} .gl {color: #d33682} .gd {color: #d33682} .lnt {color: #7f7f7f} .vc {color: #268bd2} .sb {color: #2aa198} .si {color: #2aa198} .s1 {color: #2aa198} .ne {color: #268bd2} .fm {color: #268bd2} .nl {color: #268bd2} .ln {color: #7f7f7f} . {color: #586e75} .file-tab, .selected-file {color: #586e75; background-color: #e2dcca} .x {color: #586e75} .kt {color: #859900; font-weight: bold} .l {color: #2aa198} .mb {color: #2aa198; font-weight: bold} .gu {color: #d33682} .mo {color: #2aa198; font-weight: bold} .cp {color: #93a1a1; font-style: italic} .cpf {color: #93a1a1; font-style: italic} .w {color: #586e75} .k {color: #859900} .py {color: #268bd2} .vm {color: #268bd2} .mi {color: #2aa198; font-weight: bold} .c1 {color: #93a1a1; font-style: italic} .kn {color: #dc322f; font-weight: bold} .ld {color: #2aa198} .sc {color: #2aa198} .il {color: #2aa198; font-weight: bold} .c {color: #93a1a1; font-style: italic} .kp {color: #859900} .na {color: #268bd2} .sx {color: #2aa198} .gi {color: #d33682} .gs {color: #d33682} .hl {color: #586e75; background-color: #d6d0bf} .nf {color: #268bd2} .sh {color: #2aa198} .s {color: #2aa198} .ss {color: #2aa198} .mf {color: #2aa198; font-weight: bold} .o {color: #586e75} .p {color: #586e75} .kc {color: #859900; font-weight: bold} .bp {color: #268bd2} .nc {color: #cb4b16} .no {color: #268bd2} .m {color: #2aa198; font-weight: bold} .kd {color: #859900} .dl {color: #2aa198} .cs {color: #93a1a1; font-style: italic} .gh {color: #d33682} .gp {color: #d33682} </style> `,
+        }
+    </script>
+    <script>var files = { FILES }</script>
+    <script>var entityInfo = { ENTITY_INFO }</script>
+    <script>var declInfo = { DECLARATION_INFO }</script>
+    <script>var tooltips = { TOOLTIPS }</script>
+    <div id="search" class="hidden" tabindex="-1">
+        <div id="search-form"><input placeholder="Search in package by name"></div>
+        <div id="search-results">
+            <p id="search-description">You can find anything in this package just by typing.</p>
+            <ul id="search-results-list" class="hidden"></ul>
+        </div>
+    </div>
+
+    <div class="info-flex-container">
+        <div class="info-menu-box bg hidden">
+            <div id="info-menu-container">
+                <div><button>Show shortcuts</button></div>
+                <div class="info-menu-style">
+                    <button onclick="toggleStyleList()">Select highlight style</button>
+                    <div class="info-style-list bg hidden">
+                        <ul>
+                            <li><button>bildigo</button></li>
+                            <li><button>solarized-dark</button></li>
+                            <li><button>solarized-light</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info-button-box">
+            <button onclick="toggleInfoMenu()" id="info-button" class="bildigo-svg-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.4rem" height="1.4rem" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="upper-container" id="upper-container">
+            <div class="file-container" id="file-container">
+                <div class="sticky">
+                    <div class="file-tab">
+                        <div style="flex-grow: 1">{ PROJECT_NAME }</div>
+                        <div class="button-wrapper">
+                            <button onclick="navigateToFile(currentFile)" class="bildigo-svg-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-record-circle" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                    <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                </svg>
+                            </button>
+                            <button id="filetree-expand" class="bildigo-svg-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-expand" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10z" />
+                                </svg>
+                            </button>
+                            <button id="filetree-collapse" class="bildigo-svg-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep horizontal"></div>
+                </div>
+                { FILE_TREE }
+            </div>
+            <div class="dragbar col sep" data-rel="file-container"></div>
+
+            <div class="right-code-container">
+                <div class="sticky">
+                    <div class="file-tab">
+                        <div style="flex-grow: 1" id="file-name"> </div>
+                        <div class="button-wrapper">
+                            <button id="scopes-expand" onclick="toggleAllScopes(false)" class="bildigo-svg-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-expand" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zM7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708l2-2zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10z" />
+                                </svg>
+                            </button>
+                            <button id="scopes-collapse" onclick="toggleAllScopes(true)" class="bildigo-svg-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrows-collapse" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8zm7-8a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 4.293V.5A.5.5 0 0 1 8 0zm-.5 11.707-1.146 1.147a.5.5 0 0 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 11.707V15.5a.5.5 0 0 1-1 0v-3.793z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="sep horizontal"></div>
+                </div>
+                <div class="bildigo-right-container" id="code-wrapper" tabindex="-1" autofocus>
+                    <div class="bildigo-code-container" id="main-bildigo-code-container">
+                        <div class="bildigo-linenums-box"><div class="linenums-container" id="main-linenums-container"></div></div>
+                        <div class="bildigo-scopeTriggers-box"><div class="scopeTriggers-container" id="main-scopeTriggers-container"></div></div>
+                        <div class="code" id="main-code"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dragbar row sep" data-rel="upper-container">
+
+        </div>
+        <div class="bottom-container" id="bottom-container">
+
+        </div>
+    </div>
+</body>
+</html>
