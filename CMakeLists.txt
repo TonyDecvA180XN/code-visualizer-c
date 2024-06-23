@@ -17,3 +17,6 @@ target_link_libraries(Code-Visualizer-C PRIVATE clangTooling)
 
 cmrc_add_resource_library(Code-Visualizer-Resources NAMESPACE VisualizerResources Templates/ResponsePage.html)
 target_link_libraries(Code-Visualizer-C PRIVATE Code-Visualizer-Resources)
+
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT Code-Visualizer-C)
+set_property(TARGET Code-Visualizer-C PROPERTY VS_DEBUGGER_WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
