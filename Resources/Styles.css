@@ -79,7 +79,7 @@ details.folder summary:hover {
   background-color: var(--hover);
 }
 
-details.folder summary{
+details.folder summary {
   /* background-color: rgb(15, 14, 27); */
 
   cursor: pointer;
@@ -154,4 +154,32 @@ details.folder summary{
 
 .hidden {
   display: none;
+}
+
+.code-container {
+  display: flex;
+}
+
+.line-num-bar {
+  /* width: 3rem; */
+  /* padding-left: 0.5rem; */
+  /* padding-right: 0.5rem; */
+  /* text-align: right; */
+  /* justify-content: right; */
+  /* overflow-x: hidden; */
+  margin-left: 0.5rem;
+  direction: rtl;
+}
+
+.scope-bar {
+  width: 1rem;
+  text-align: center;
+}
+
+.thin-separator {
+  background-color: var(--separator);
+
+  padding: 1px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
