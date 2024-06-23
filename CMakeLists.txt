@@ -13,10 +13,12 @@ target_sources(
           Include/VisualizerAction.h
           Include/VisualizerASTConsumer.h
           Include/VisualizerFrontendActionFactory.h
+          Include/VisualizerVisitor.h
           Source/Main.cpp
           Source/VisualizerAction.cpp
           Source/VisualizerASTConsumer.cpp
-          Source/VisualizerFrontendActionFactory.cpp)
+          Source/VisualizerFrontendActionFactory.cpp
+          Source/VisualizerVisitor.cpp)
 
 target_compile_features(Code-Visualizer-C PRIVATE cxx_std_20)
 target_include_directories(Code-Visualizer-C PRIVATE ${LLVM_INCLUDE_DIRS}

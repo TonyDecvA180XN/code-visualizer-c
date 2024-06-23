@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VisualizerAction.h"
+#include "Core.h"
 
 #include "clang/Tooling/Tooling.h"
 

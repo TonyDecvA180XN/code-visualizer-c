@@ -11,7 +11,7 @@ VisualizerAction::VisualizerAction(FileTable& fileTable) : mFileTable(fileTable)
 
 std::unique_ptr<clang::ASTConsumer> VisualizerAction::CreateASTConsumer(clang::CompilerInstance& compilerInstance, llvm::StringRef filename)
 {
-	return std::make_unique<VisualizerASTConsumer>();
+	return std::make_unique<VisualizerASTConsumer>(mRewriter);
 }
 
 bool VisualizerAction::BeginSourceFileAction(clang::CompilerInstance& compilerInstance)
@@ -30,6 +30,10 @@ void VisualizerAction::EndSourceFileAction()
 
 	clang::RewriteBuffer& rewriteBuffer = mRewriter.getEditBuffer(currentSourceFileId);
 	std::string text(rewriteBuffer.begin(), rewriteBuffer.end());
+
+	using namespace Quote;
+	text = ReplaceAll(text, TAG_QUOTE, TRUE_QUOTE);
+	text = ReplaceAll(text, SPECIAL_STRING, TAG_QUOTE);
 
 	std::filesystem::path relativePath = std::filesystem::relative(sourceFilename);
 	mFileTable[relativePath.string()] = text;

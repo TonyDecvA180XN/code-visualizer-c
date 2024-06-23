@@ -3,8 +3,8 @@
 #include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Rewrite/Frontend/FrontendActions.h"
 
-#include <memory>
 #include <Core.h>
+#include <memory>
 
 class VisualizerAction : public clang::ASTFrontendAction
 {

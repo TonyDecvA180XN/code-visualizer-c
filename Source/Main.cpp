@@ -2,9 +2,9 @@
 
 #include "clang/Tooling/CommonOptionsParser.h"
 
+#include <Core.h>
 #include <VisualizerFrontendActionFactory.h>
 #include <filesystem>
-#include <Core.h>
 
 // Apply a custom category to all command-line options so
 // that they are the only ones displayed.
@@ -18,20 +18,6 @@ static llvm::cl::extrahelp CommonHelp(clang::tooling::CommonOptionsParser::HelpM
 
 CMRC_DECLARE(VisualizerResources);
 
-
-std::string ReplaceAll(const std::string& source, const std::string& find, const std::string& replace)
-{
-	std::string result = source;
-	size_t offset = result.find(find);
-	while (offset != std::string::npos)
-	{
-		result.replace(offset, std::string(find).size(), replace);
-		offset += replace.size();
-		offset = result.find(find, offset);
-	}
-	return result;
-}
-
 int main(int argc, const char** argv)
 {
 	using namespace clang::tooling;
@@ -44,7 +30,7 @@ int main(int argc, const char** argv)
 	}
 
 	FileTable files;
-	
+
 	ClangTool tool(commandLineParser.get().getCompilations(), commandLineParser.get().getSourcePathList());
 
 	std::unique_ptr<FrontendActionFactory> factory = std::make_unique<VisualizerFrontendActionFactory>(files);

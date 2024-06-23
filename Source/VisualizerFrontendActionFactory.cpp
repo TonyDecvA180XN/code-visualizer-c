@@ -1,4 +1,5 @@
 #include "VisualizerFrontendActionFactory.h"
+#include <VisualizerAction.h>
 
 VisualizerFrontendActionFactory::VisualizerFrontendActionFactory(FileTable& fileTable) : mFileTable(fileTable) {}
 
