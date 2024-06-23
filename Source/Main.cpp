@@ -1,13 +1,8 @@
 #include "cmrc/cmrc.hpp"
 
-#include "clang/AST/ASTConsumer.h"
-#include "clang/Frontend/CompilerInstance.h"
-#include "clang/Frontend/FrontendActions.h"
-#include "clang/Rewrite/Core/Rewriter.h"
 #include "clang/Tooling/CommonOptionsParser.h"
-#include "clang/Tooling/Tooling.h"
-#include "llvm/Support/CommandLine.h"
 
+#include <VisualizerFrontendActionFactory.h>
 #include <filesystem>
 
 // Apply a custom category to all command-line options so
@@ -23,53 +18,6 @@ static llvm::cl::extrahelp CommonHelp(clang::tooling::CommonOptionsParser::HelpM
 CMRC_DECLARE(VisualizerResources);
 
 std::map<std::string, std::string> FILES;
-
-class VisualizerASTConsumer : public clang::ASTConsumer
-{
-public:
-	//void HandleTranslationUnit(clang::ASTContext& context) override
-	//{
-	//}
-};
-
-class VisualizerAction : public clang::ASTFrontendAction
-{
-public:
-	std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance& compilerInstance, llvm::StringRef filename) override
-	{
-		return std::make_unique<VisualizerASTConsumer>();
-	}
-
-	bool BeginSourceFileAction(clang::CompilerInstance& compilerInstance) override
-	{
-		clang::SourceManager& sourceManager = compilerInstance.getSourceManager();
-		mRewriter.setSourceMgr(sourceManager, compilerInstance.getLangOpts());
-		return true;
-	}
-
-	void EndSourceFileAction() override
-	{
-		clang::SourceManager& sourceManager = mRewriter.getSourceMgr();
-		clang::FileID currentSourceFileId = sourceManager.getMainFileID();
-
-		std::string sourceFilename = sourceManager.getFileEntryForID(currentSourceFileId)->getName().str();
-
-		clang::RewriteBuffer& rewriteBuffer = mRewriter.getEditBuffer(currentSourceFileId);
-		std::string text(rewriteBuffer.begin(), rewriteBuffer.end());
-
-		std::filesystem::path relativePath = std::filesystem::relative(sourceFilename);
-		FILES[relativePath.string()] = text;
-	}
-
-private:
-	clang::Rewriter mRewriter;
-};
-
-class VisualizerFrontendActionFactory : public clang::tooling::FrontendActionFactory
-{
-public:
-	std::unique_ptr<clang::FrontendAction> create() override { return std::make_unique<VisualizerAction>(); }
-};
 
 std::string ReplaceAll(const std::string& source, const std::string& find, const std::string& replace)
 {
