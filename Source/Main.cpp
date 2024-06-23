@@ -65,11 +65,15 @@ int main(int argc, const char** argv)
 	cmrc::file themePage = filesystem.open("Resources/Theme.css");
 	std::string themeContent(themePage.begin(), themePage.end());
 
+	cmrc::file jsPage = filesystem.open("Resources/Script.js");
+	std::string jsContent(jsPage.begin(), jsPage.end());
+
 	std::string filename = std::filesystem::relative(commandLineParser.get().getSourcePathList()[0]).string();
 
 	std::string output = skeletonContent;
 	output = ReplaceAll(output, "<link rel=\"stylesheet\" href=\"styles.css\" />", std::format("<style>\n{}\n</style>\n", stylesContent));
 	output = ReplaceAll(output, "<link rel=\"stylesheet\" href=\"theme.css\" />", std::format("<style>\n{}\n</style>\n", themeContent));
+	output = ReplaceAll(output, "<script src=\"script.js\"></script>", std::format("<script>\n{}\n</script>\n", jsContent));
 	output = ReplaceAll(output, "{CODE}", files[filename]);
 
 	std::string outputFilename = "Output/Output.html";
