@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+
+  <body>
+    <div class="main-container text-label">
+      <div class="left-container" id="left-container">
+        <div class="title-container">
+          <div class="title text-label">Project Title</div>
+        </div>
+        <div class="separator"></div>
+        <div class="explorer">
+          <details class="folder">
+            <summary>Include</summary>
+            <div class="filetree-indent">
+              <details class="folder">
+                <summary>Math</summary>
+                <div class="filetree-indent">
+                  <a class="file">sqrt file.h</a>
+                </div>
+              </details>
+              <a class="file">Header.h</a>
+            </div>
+          </details>
+          <a class="file">Main.c</a>
+          <a class="file">File.c</a>
+        </div>
+      </div>
+      <div class="dragbar separator" linkedTo="left-container"></div>
+      <div class="right-container">
+        <div class="header title-container">
+          <div class="filename title">Filename</div>
+          <div class="file-controls">
+            <div class="wrap-setting">
+              <label for="word-wrap-toggle">Word wrap</label>
+              <input checked id="word-wrap-toggle" type="checkbox" />
+            </div>
+            <div class="filter-setting">
+              <span>From</span>
+              <input class="number-field" id="filter-from" type="number" value="1" />
+              <span>to</span>
+              <input class="number-field" id="filter-to" type="number" value="100" />
+            </div>
+            <div class="indent-setting">
+              <button class="dropbtn">Set indentation</button>
+              <div class="dropdown-content hidden" id="indentSizeOptions">
+                <span onclick="setIndents(1)">1</span>
+                <span onclick="setIndents(2)">2</span>
+                <span onclick="setIndents(4)">4</span>
+                <span onclick="setIndents(8)">8</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="separator"></div>
+        <div class="code-container text-code">{CODE}</div>
+      </div>
+    </div>
+
+    <script>
+      let dragbar = document.getElementsByClassName("dragbar")[0];
+      let moveId = dragbar.getAttribute("linkedTo");
+      let elementToMove = document.getElementById(moveId);
+
+      let moveElement = (dragbar, toMove) => (e) => {
+        document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
+
+        toMove.style.width = e.pageX - dragbar.offsetWidth / 2 + "px";
+      };
+
+      let listener = moveElement(dragbar, elementToMove);
+      dragbar.addEventListener("mousedown", () => {
+        document.addEventListener("mousemove", listener);
+      });
+      dragbar.addEventListener("mouseup", () => {
+        document.removeEventListener("mousemove", listener);
+      });
+    </script>
+  </body>
+</html>
