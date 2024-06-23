@@ -122,7 +122,7 @@ int main(int argc, const char** argv)
 	output = ReplaceAll(output, "<link rel=\"stylesheet\" href=\"theme.css\" />", std::format("<style>\n{}\n</style>\n", themeContent));
 	output = ReplaceAll(output, "{CODE}", FILES[filename]);
 
-	std::string outputFilename = "Examples/Output.html";
+	std::string outputFilename = "Output/Output.html";
 	std::error_code error;
 	llvm::raw_fd_ostream outFile(outputFilename, error);
 	outFile.write(output.c_str(), output.size());
