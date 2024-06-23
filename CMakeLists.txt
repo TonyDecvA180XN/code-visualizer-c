@@ -8,6 +8,7 @@ find_package(CMakeRC CONFIG REQUIRED)
 add_executable(Code-Visualizer-C)
 
 target_sources(Code-Visualizer-C PRIVATE
+    Include/Core.h
     Include/VisualizerAction.h
     Include/VisualizerASTConsumer.h
     Include/VisualizerFrontendActionFactory.h

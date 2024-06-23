@@ -4,6 +4,7 @@
 
 #include <VisualizerFrontendActionFactory.h>
 #include <filesystem>
+#include <Core.h>
 
 // Apply a custom category to all command-line options so
 // that they are the only ones displayed.
@@ -17,7 +18,6 @@ static llvm::cl::extrahelp CommonHelp(clang::tooling::CommonOptionsParser::HelpM
 
 CMRC_DECLARE(VisualizerResources);
 
-std::map<std::string, std::string> FILES;
 
 std::string ReplaceAll(const std::string& source, const std::string& find, const std::string& replace)
 {
@@ -43,9 +43,11 @@ int main(int argc, const char** argv)
 		return -1;
 	}
 
+	FileTable files;
+	
 	ClangTool tool(commandLineParser.get().getCompilations(), commandLineParser.get().getSourcePathList());
 
-	std::unique_ptr<FrontendActionFactory> factory = std::make_unique<VisualizerFrontendActionFactory>();
+	std::unique_ptr<FrontendActionFactory> factory = std::make_unique<VisualizerFrontendActionFactory>(files);
 
 	const int status = tool.run(factory.get());
 
@@ -68,7 +70,7 @@ int main(int argc, const char** argv)
 	std::string output = skeletonContent;
 	output = ReplaceAll(output, "<link rel=\"stylesheet\" href=\"styles.css\" />", std::format("<style>\n{}\n</style>\n", stylesContent));
 	output = ReplaceAll(output, "<link rel=\"stylesheet\" href=\"theme.css\" />", std::format("<style>\n{}\n</style>\n", themeContent));
-	output = ReplaceAll(output, "{CODE}", FILES[filename]);
+	output = ReplaceAll(output, "{CODE}", files[filename]);
 
 	std::string outputFilename = "Output/Output.html";
 	std::error_code error;

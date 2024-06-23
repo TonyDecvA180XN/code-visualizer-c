@@ -7,6 +7,8 @@
 
 extern std::map<std::string, std::string> FILES;
 
+VisualizerAction::VisualizerAction(FileTable& fileTable) : mFileTable(fileTable) {}
+
 std::unique_ptr<clang::ASTConsumer> VisualizerAction::CreateASTConsumer(clang::CompilerInstance& compilerInstance, llvm::StringRef filename)
 {
 	return std::make_unique<VisualizerASTConsumer>();
@@ -30,5 +32,5 @@ void VisualizerAction::EndSourceFileAction()
 	std::string text(rewriteBuffer.begin(), rewriteBuffer.end());
 
 	std::filesystem::path relativePath = std::filesystem::relative(sourceFilename);
-	FILES[relativePath.string()] = text;
+	mFileTable[relativePath.string()] = text;
 }
