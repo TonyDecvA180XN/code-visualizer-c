@@ -30,12 +30,12 @@
               <input class="number-field" id="filter-to" type="number" value="100" />
             </div>
             <div class="indent-setting">
-              <button class="dropbtn">Set indentation</button>
+              <button class="button" onclick="showDropdown('indentSizeOptions')">Set indentation</button>
               <div class="dropdown-content hidden" id="indentSizeOptions">
-                <span onclick="setIndents(1)">1</span>
-                <span onclick="setIndents(2)">2</span>
-                <span onclick="setIndents(4)">4</span>
-                <span onclick="setIndents(8)">8</span>
+                <div onclick="setIndents(1)">1</div>
+                <div onclick="setIndents(2)">2</div>
+                <div onclick="setIndents(4)">4</div>
+                <div onclick="setIndents(8)">8</div>
               </div>
             </div>
           </div>

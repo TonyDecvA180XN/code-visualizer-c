@@ -152,6 +152,32 @@ details.folder summary {
   border-radius: 3px;
 }
 
+.button {
+  cursor: pointer;
+  border-color: #586e75;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 3px;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  background-color: var(--background);
+  min-width: 4rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  text-align: right;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+.dropdown-content div:hover {
+  /* background-color: #ddd; */
+  background-color: var(--hover);
+}
+
 .hidden {
   display: none;
 }

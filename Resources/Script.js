@@ -27,3 +27,25 @@ function setIndents(size) {
   }
 }
 setIndents(4);
+
+function hideDropdown() {
+  var dropdowns = document.getElementsByClassName("dropdown-content");
+  for (var i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+    openDropdown.classList.add("hidden");
+    // if (!openDropdown.classList.contains("show")) {
+    // }
+  }
+}
+
+function showDropdown(id) {
+  hideDropdown();
+  document.getElementById(id).classList.toggle("hidden");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+  if (!event.target.matches(".button")) {
+    hideDropdown();
+  }
+};
