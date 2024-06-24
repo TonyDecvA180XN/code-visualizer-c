@@ -37,6 +37,7 @@ std::string CodeBuilder::BuildCodeCluster()
 
 		MarkupTreeNode& content = line.AppendChild("span");
 		content.AddAttribute("class", "code");
+		content.AddAttribute("id", std::format("ln#{}", i + 1));
 		content.SetText(lines[i]);
 	}
 
