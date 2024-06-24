@@ -1,7 +1,7 @@
 // including headers
 #include <stdio.h>
 
-#include "Header.h"
+#include "Folder/Header.h"
 
 // struct definition
 struct Point

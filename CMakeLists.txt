@@ -11,12 +11,14 @@ target_sources(
   Code-Visualizer-C
   PRIVATE Include/Core.h
           Include/CodeBuilder.h
+          Include/FileTree.h
           Include/MarkupTree.h
           Include/VisualizerAction.h
           Include/VisualizerASTConsumer.h
           Include/VisualizerFrontendActionFactory.h
           Include/VisualizerVisitor.h
           Source/CodeBuilder.cpp
+          Source/FileTree.cpp
           Source/Main.cpp
           Source/MarkupTree.cpp
           Source/VisualizerAction.cpp

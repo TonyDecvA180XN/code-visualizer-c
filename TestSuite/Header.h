@@ -1,1 +1,0 @@
-void foo(int param1, float param2);

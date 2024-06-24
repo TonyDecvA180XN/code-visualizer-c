@@ -32,7 +32,7 @@ body {
 .left-container {
   /* background-color: darksalmon; */
 
-  width: 200px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;

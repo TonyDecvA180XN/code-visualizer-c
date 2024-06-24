@@ -3,6 +3,7 @@
 #include "clang/Tooling/CommonOptionsParser.h"
 
 #include <Core.h>
+#include <FileTree.h>
 #include <VisualizerFrontendActionFactory.h>
 #include <filesystem>
 
@@ -29,10 +30,19 @@ int main(int argc, const char** argv)
 		return -1;
 	}
 
+	std::vector<std::string> sourcePathList = commandLineParser.get().getSourcePathList();
+
+	FileTree fileTree(std::filesystem::current_path().string());
+	for (std::string& path : sourcePathList)
+	{
+		fileTree.AddPath(path);
+	}
+	std::string fileTreeHTML = fileTree.BuildMarkupTree();
+	std::string projectTitle = fileTree.GetRootName();
+
+	ClangTool tool(commandLineParser.get().getCompilations(), sourcePathList);
+
 	FileTable files;
-
-	ClangTool tool(commandLineParser.get().getCompilations(), commandLineParser.get().getSourcePathList());
-
 	std::unique_ptr<FrontendActionFactory> factory = std::make_unique<VisualizerFrontendActionFactory>(files);
 
 	const int status = tool.run(factory.get());
@@ -60,6 +70,8 @@ int main(int argc, const char** argv)
 	output = ReplaceAll(output, "<link rel=\"stylesheet\" href=\"styles.css\" />", std::format("<style>\n{}\n</style>\n", stylesContent));
 	output = ReplaceAll(output, "<link rel=\"stylesheet\" href=\"theme.css\" />", std::format("<style>\n{}\n</style>\n", themeContent));
 	output = ReplaceAll(output, "<script src=\"script.js\"></script>", std::format("<script>\n{}\n</script>\n", jsContent));
+	output = ReplaceAll(output, "<div class=\"explorer\"></div>", fileTreeHTML);
+	output = ReplaceAll(output, "{PROJECT_TITLE}", projectTitle);
 	output = ReplaceAll(output, "{CODE}", files[filename]);
 
 	std::string outputFilename = "Output/Output.html";
