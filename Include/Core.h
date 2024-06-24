@@ -1,5 +1,6 @@
 #pragma once
 
+#include <filesystem>
 #include <format>
 #include <map>
 #include <string>
@@ -17,6 +18,22 @@ inline std::string ReplaceAll(const std::string& source, const std::string& find
 		offset = result.find(find, offset);
 	}
 	return result;
+}
+
+inline std::filesystem::path UniversalPath(std::filesystem::path path)
+{
+	return ReplaceAll(path.string(), "\\", "/");
+}
+
+inline std::filesystem::path UniversalPath(std::string filename)
+{
+	std::filesystem::path path(filename);
+	return UniversalPath(path);
+}
+
+inline std::filesystem::path UniversalLocalPath(std::filesystem::path filename)
+{
+	return UniversalPath(std::filesystem::relative(filename, std::filesystem::current_path()));
 }
 
 namespace Quote

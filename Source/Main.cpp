@@ -32,10 +32,10 @@ int main(int argc, const char** argv)
 
 	std::vector<std::string> sourcePathList = commandLineParser.get().getSourcePathList();
 
-	FileTree fileTree(std::filesystem::current_path().string());
+	FileTree fileTree(UniversalPath(std::filesystem::current_path().string()).string());
 	for (std::string& path : sourcePathList)
 	{
-		fileTree.AddPath(path);
+		fileTree.AddPath(UniversalLocalPath(path).string());
 	}
 	std::string fileTreeHTML = fileTree.BuildMarkupTree();
 	std::string projectTitle = fileTree.GetRootName();
@@ -64,7 +64,11 @@ int main(int argc, const char** argv)
 	cmrc::file jsPage = filesystem.open("Resources/Script.js");
 	std::string jsContent(jsPage.begin(), jsPage.end());
 
-	std::string filename = std::filesystem::relative(commandLineParser.get().getSourcePathList()[0]).string();
+	std::stringstream filesContent;
+	for (auto& [name, text] : files)
+	{
+		filesContent << text << "\n";
+	}
 
 	std::string output = skeletonContent;
 	output = ReplaceAll(output, "<link rel=\"stylesheet\" href=\"styles.css\" />", std::format("<style>\n{}\n</style>\n", stylesContent));
@@ -72,7 +76,7 @@ int main(int argc, const char** argv)
 	output = ReplaceAll(output, "<script src=\"script.js\"></script>", std::format("<script>\n{}\n</script>\n", jsContent));
 	output = ReplaceAll(output, "<div class=\"explorer\"></div>", fileTreeHTML);
 	output = ReplaceAll(output, "{PROJECT_TITLE}", projectTitle);
-	output = ReplaceAll(output, "{CODE}", files[filename]);
+	output = ReplaceAll(output, "{CODE}", filesContent.str());
 
 	std::string outputFilename = "Output/Output.html";
 	std::error_code error;

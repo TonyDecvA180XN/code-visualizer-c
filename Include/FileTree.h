@@ -8,7 +8,7 @@ class FileTree
 public:
 	struct Node
 	{
-		std::string mName;
+		std::string mName, mFullName;
 		std::map<std::string, Node> mChildren;
 	};
 

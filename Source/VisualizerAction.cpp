@@ -28,7 +28,7 @@ void VisualizerAction::EndSourceFileAction()
 	clang::FileID currentSourceFileId = sourceManager.getMainFileID();
 
 	std::string sourceFilename = sourceManager.getFileEntryForID(currentSourceFileId)->getName().str();
-	std::string relativePath = std::filesystem::relative(sourceFilename).make_preferred().string();
+	std::string relativePath = UniversalLocalPath(sourceFilename).string();
 
 	clang::RewriteBuffer& rewriteBuffer = mRewriter.getEditBuffer(currentSourceFileId);
 	std::string text(rewriteBuffer.begin(), rewriteBuffer.end());

@@ -17,7 +17,7 @@
       <div class="dragbar separator" linkedTo="left-container"></div>
       <div class="right-container">
         <div class="header title-container">
-          <div class="filename title">Filename</div>
+          <div class="filename title" id="filename">Filename</div>
           <div class="file-controls">
             <div class="wrap-setting">
               <label for="word-wrap-toggle">Word wrap</label>
@@ -44,26 +44,18 @@
 
         <div class="code-vertical">
           <div class="code-horizontal text-code">
-            <div class="line-num-bar">
-              <div>1</div>
-              <div>12</div>
-              <div>123</div>
-              <div>1234</div>
-              <div>12345</div>
-              <div>123456</div>
-              <div>1234567</div>
-              <div>12345678</div>
-              <div>123456789</div>
-            </div>
+            <div class="line-num-bar" id="line-num-bar"></div>
             <div class="thin-separator"></div>
             <div class="scope-bar">→</div>
             <div class="thin-separator"></div>
-            {CODE}
+            <div class="code-view" id="main-view"></div>
           </div>
         </div>
       </div>
     </div>
 
     <script src="script.js"></script>
+
+    {CODE}
   </body>
 </html>

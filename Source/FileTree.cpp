@@ -1,5 +1,6 @@
 #include "FileTree.h"
 
+#include <Core.h>
 #include <MarkupTree.h>
 #include <queue>
 
@@ -15,7 +16,7 @@ std::string FileTree::GetRootName() const
 
 void FileTree::AddPath(std::string filename)
 {
-	std::filesystem::path path = std::filesystem::path(filename).relative_path().make_preferred();
+	std::filesystem::path path = UniversalPath(filename);
 	Node* current = &mRoot;
 	for (auto it = path.begin(); it != path.end(); ++it)
 	{
@@ -26,6 +27,7 @@ void FileTree::AddPath(std::string filename)
 		}
 		current = &(current->mChildren[element]);
 	}
+	current->mFullName = path.string();
 }
 
 std::string FileTree::BuildMarkupTree() const
@@ -53,6 +55,7 @@ std::string FileTree::BuildMarkupTree() const
 		{
 			MarkupTreeNode& tag = currentTag->AppendChild("a");
 			tag.AddAttribute("class", "file");
+			tag.AddAttribute("onclick", std::format("openFile(\'{}\')", currentFile->mFullName));
 			tag.SetText(currentFile->mName);
 		}
 		else // is a folder

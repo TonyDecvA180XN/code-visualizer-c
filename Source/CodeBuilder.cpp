@@ -24,6 +24,7 @@ std::string CodeBuilder::BuildCodeCluster()
 
 	MarkupTree cluster("div");
 	MarkupTreeNode& clusterRoot = cluster.GetRoot();
+	clusterRoot.AddAttribute("class", "code-content hidden");
 	clusterRoot.AddAttribute("id", mFilename);
 
 	for (size_t i = 0; i != lines.size(); ++i)
