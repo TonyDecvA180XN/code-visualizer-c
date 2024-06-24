@@ -15,3 +15,15 @@ dragbar.addEventListener("mousedown", () => {
 dragbar.addEventListener("mouseup", () => {
   document.removeEventListener("mousemove", listener);
 });
+
+var indents = document.getElementsByClassName("indent");
+function setIndents(size) {
+  for (let i = 0; i < indents.length; i++) {
+    const element = indents[i];
+    if (element.hasAttribute("level")) {
+      level = Number(element.getAttribute("level"));
+      element.innerHTML = "&nbsp;".repeat(size).repeat(level);
+    }
+  }
+}
+setIndents(4);

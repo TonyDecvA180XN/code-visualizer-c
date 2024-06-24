@@ -50,6 +50,16 @@ int main(int argc, char** argv)
 		var += 1;
 	}
 
+	while (var > 0)
+	{
+		int a = var + 4;
+		if (var > a)
+		{
+			break;
+		}
+		var++;
+	}
+
 	do
 	{
 		var /= 2;

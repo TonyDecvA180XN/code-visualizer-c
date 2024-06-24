@@ -2,6 +2,7 @@
 
 #include "clang/Frontend/CompilerInstance.h"
 
+#include <CodeBuilder.h>
 #include <VisualizerASTConsumer.h>
 #include <filesystem>
 
@@ -27,14 +28,13 @@ void VisualizerAction::EndSourceFileAction()
 	clang::FileID currentSourceFileId = sourceManager.getMainFileID();
 
 	std::string sourceFilename = sourceManager.getFileEntryForID(currentSourceFileId)->getName().str();
+	std::string relativePath = std::filesystem::relative(sourceFilename).make_preferred().string();
 
 	clang::RewriteBuffer& rewriteBuffer = mRewriter.getEditBuffer(currentSourceFileId);
 	std::string text(rewriteBuffer.begin(), rewriteBuffer.end());
 
-	using namespace Quote;
-	text = ReplaceAll(text, TAG_QUOTE, TRUE_QUOTE);
-	text = ReplaceAll(text, SPECIAL_STRING, TAG_QUOTE);
+	CodeBuilder codeBuilder(relativePath, text);
+	std::string codeCluster = codeBuilder.BuildCodeCluster();
 
-	std::filesystem::path relativePath = std::filesystem::relative(sourceFilename);
-	mFileTable[relativePath.string()] = text;
+	mFileTable[relativePath] = codeCluster;
 }

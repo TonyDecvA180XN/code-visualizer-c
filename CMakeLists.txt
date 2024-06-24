@@ -10,11 +10,15 @@ add_executable(Code-Visualizer-C)
 target_sources(
   Code-Visualizer-C
   PRIVATE Include/Core.h
+          Include/CodeBuilder.h
+          Include/MarkupTree.h
           Include/VisualizerAction.h
           Include/VisualizerASTConsumer.h
           Include/VisualizerFrontendActionFactory.h
           Include/VisualizerVisitor.h
+          Source/CodeBuilder.cpp
           Source/Main.cpp
+          Source/MarkupTree.cpp
           Source/VisualizerAction.cpp
           Source/VisualizerASTConsumer.cpp
           Source/VisualizerFrontendActionFactory.cpp
