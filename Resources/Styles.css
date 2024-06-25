@@ -186,7 +186,7 @@ details.folder summary {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  overflow-x: scroll;
+  /* overflow-x: scroll; */
   overflow-y: scroll;
 }
 
@@ -203,6 +203,15 @@ details.folder summary {
 .scope-bar {
   width: 1rem;
   text-align: center;
+}
+
+.scope-bar > div:hover {
+  background-color: var(--hover);
+}
+
+.collapsed {
+  background-color: #b4d000;
+  border-radius: 3px;
 }
 
 .thin-separator {
@@ -231,38 +240,4 @@ p {
 
 .code:empty {
   width: 1px;
-}
-
-.code-comment {
-  color: #007a00;
-}
-.code-directive {
-  color: #757575;
-}
-.code-literal-str {
-  color: #e54a00;
-}
-.code-literal-num {
-  color: #708b05;
-}
-.code-type-internal {
-  color: black;
-}
-.code-type-user {
-  color: #00889f;
-}
-.code-keyword-decl {
-  color: #006cb9;
-}
-.code-keyword-oper {
-  color: #990199;
-}
-.code-id-fun {
-  color: #a9670f;
-}
-.code-id-var {
-  color: #1e4164;
-}
-.code-ln {
-  color: #2b6d83;
 }

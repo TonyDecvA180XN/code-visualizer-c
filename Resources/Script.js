@@ -51,9 +51,30 @@ window.onclick = function (event) {
   }
 };
 
+function updateCodeView() {
+  var line_numbers = line_num_bar.children;
+  var scopes = scope_bar.children;
+  var lines = main_view.firstChild.getElementsByTagName("p");
+
+  for (let id = 0; id < lines.length; id++) {
+    var line_number = line_numbers[id];
+    var scope = scopes[id];
+    var line = lines[id];
+
+    if (line.hasAttribute("filtered") || line.hasAttribute("collapsed")) {
+      line.classList.add("hidden");
+      scope.classList.add("hidden");
+      line_number.classList.add("hidden");
+    } else {
+      line.classList.remove("hidden");
+      scope.classList.remove("hidden");
+      line_number.classList.remove("hidden");
+    }
+  }
+}
+
 function on_filter_change() {
   var lines = main_view.firstChild.getElementsByTagName("p");
-  var line_numbers = line_num_bar.children;
 
   filter_from.setAttribute("min", 1);
   filter_from.setAttribute("max", filter_to.value);
@@ -69,16 +90,9 @@ function on_filter_change() {
     } else {
       line.removeAttribute("filtered");
     }
-
-    var line_number = line_numbers[id];
-    if (line.hasAttribute("filtered") || line.hasAttribute("collapsed")) {
-      line.classList.add("hidden");
-      line_number.classList.add("hidden");
-    } else {
-      line.classList.remove("hidden");
-      line_number.classList.remove("hidden");
-    }
   }
+
+  updateCodeView();
 }
 
 var filter_from = document.getElementById("filter-from");
@@ -91,6 +105,7 @@ filter_to.oninput = on_filter_change;
 var main_view = document.getElementById("main-view");
 var current_filename = document.getElementById("filename");
 var line_num_bar = document.getElementById("line-num-bar");
+var scope_bar = document.getElementById("scope-bar");
 
 window.onload = function () {
   openFile(document.getElementsByClassName("code-content")[0].id);
@@ -109,6 +124,7 @@ function openFile(filename) {
   showLineNumbers(clone.childElementCount);
   filter_from.value = 1;
   filter_to.value = clone.childElementCount;
+  showCollapseButtons(filename, clone.childElementCount);
 }
 
 function showLineNumbers(number) {
@@ -121,3 +137,62 @@ function showLineNumbers(number) {
     line_num_bar.appendChild(ln);
   }
 }
+
+function showCollapseButtons(filename, number) {
+  while (scope_bar.hasChildNodes()) {
+    scope_bar.removeChild(scope_bar.firstChild);
+  }
+
+  for (var i = 0; i < number; i++) {
+    var button = document.createElement("div");
+    button.innerHTML = "&nbsp;";
+    scope_bar.appendChild(button);
+  }
+
+  var current_brackets = brackets[filename];
+  for (let i = 0; i < current_brackets.length; i++) {
+    const pair = current_brackets[i];
+    const from = pair["from"];
+    const to = pair["to"];
+
+    var scope = scope_bar.children[from];
+    scope.onclick = collapseRange(from + 1, to + 1);
+    scope.innerHTML = "↓";
+  }
+}
+
+let collapseRange = (from, to) => (e) => {
+  var lines = main_view.firstChild.getElementsByTagName("p");
+  var scope = e.target;
+
+  for (let i = from + 1; i <= to; i++) {
+    var line = lines[i - 1];
+
+    if (scope.hasAttribute("active")) {
+      // unhide
+      if (line.getAttribute("collapsed") == 1) {
+        line.removeAttribute("collapsed");
+      } else {
+        line.setAttribute("collapsed", Number(line.getAttribute("collapsed")) - 1);
+      }
+    } else {
+      // hide
+      if (line.hasAttribute("collapsed")) {
+        line.setAttribute("collapsed", Number(line.getAttribute("collapsed")) + 1);
+      } else {
+        line.setAttribute("collapsed", 1);
+      }
+    }
+  }
+  if (scope.hasAttribute("active")) {
+    scope.removeAttribute("active");
+    scope.classList.remove("collapsed");
+    scope.innerHTML = "↓";
+  } else {
+    scope.setAttribute("active", "");
+    scope.classList.add("collapsed");
+    scope.innerHTML = "→";
+  }
+
+  updateCodeView();
+};

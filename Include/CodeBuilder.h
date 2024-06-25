@@ -9,7 +9,7 @@ class CodeBuilder
 public:
 	CodeBuilder(std::string filename, std::string text);
 
-	std::string BuildCodeCluster();
+	std::string BuildCodeCluster(std::map<size_t, size_t>& bracketsTable);
 
 private:
 	std::vector<std::string> SplitTextIntoLines(std::string text);

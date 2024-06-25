@@ -10,14 +10,14 @@
 
 CodeBuilder::CodeBuilder(std::string filename, std::string text) : mFilename(filename), mText(text) {}
 
-std::string CodeBuilder::BuildCodeCluster()
+std::string CodeBuilder::BuildCodeCluster(std::map<size_t, size_t>& bracketsTable)
 {
 	std::vector<std::string> lines = SplitTextIntoLines(mText);
 	std::vector<size_t> indents = BuildIndentTable(lines);
 	StripLines(lines);
 
-	std::map<size_t, size_t> brackets = BuildBracketsTable(lines);
-	FilterShortBrackets(brackets);
+	bracketsTable = BuildBracketsTable(lines);
+	FilterShortBrackets(bracketsTable);
 	StyleSystemHeaderLiterals(lines);
 	StyleMultilineElements(lines);
 	FixQuotes(lines);

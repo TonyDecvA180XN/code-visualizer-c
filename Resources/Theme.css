@@ -1,6 +1,39 @@
 .main-container {
-    --background: #e6e1ce;
-    --separator: #a6a295;
-    --hover: #beb9aa;
-    --font: #586e75;
+  --background: #e6e1ce;
+  --separator: #a6a295;
+  --hover: #beb9aa;
+  --font: #586e75;
+}
+.code-comment {
+  color: #007a00;
+}
+.code-directive {
+  color: #757575;
+}
+.code-literal-str {
+  color: #e54a00;
+}
+.code-literal-num {
+  color: #708b05;
+}
+.code-type-internal {
+  color: black;
+}
+.code-type-user {
+  color: #00889f;
+}
+.code-keyword-decl {
+  color: #006cb9;
+}
+.code-keyword-oper {
+  color: #990199;
+}
+.code-id-fun {
+  color: #a9670f;
+}
+.code-id-var {
+  color: #1e4164;
+}
+.code-ln {
+  color: #2b6d83;
 }

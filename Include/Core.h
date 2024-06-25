@@ -5,7 +5,13 @@
 #include <map>
 #include <string>
 
-using FileTable = std::map<std::string, std::string>;
+struct FileData
+{
+	std::string mText;
+	std::map<size_t, size_t> mBracketsTable;
+};
+
+using FileTable = std::map<std::string, FileData>;
 
 inline std::string ReplaceAll(const std::string& source, const std::string& find, const std::string& replace)
 {

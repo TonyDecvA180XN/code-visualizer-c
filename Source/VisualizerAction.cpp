@@ -6,8 +6,6 @@
 #include <VisualizerASTConsumer.h>
 #include <filesystem>
 
-extern std::map<std::string, std::string> FILES;
-
 VisualizerAction::VisualizerAction(FileTable& fileTable) : mFileTable(fileTable) {}
 
 std::unique_ptr<clang::ASTConsumer> VisualizerAction::CreateASTConsumer(clang::CompilerInstance& compilerInstance, llvm::StringRef filename)
@@ -34,7 +32,9 @@ void VisualizerAction::EndSourceFileAction()
 	std::string text(rewriteBuffer.begin(), rewriteBuffer.end());
 
 	CodeBuilder codeBuilder(relativePath, text);
-	std::string codeCluster = codeBuilder.BuildCodeCluster();
+	std::map<size_t, size_t> bracketsTable;
+	std::string codeCluster = codeBuilder.BuildCodeCluster(bracketsTable);
 
-	mFileTable[relativePath] = codeCluster;
+	mFileTable[relativePath].mText = codeCluster;
+	mFileTable[relativePath].mBracketsTable = bracketsTable;
 }

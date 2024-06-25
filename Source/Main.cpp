@@ -1,6 +1,8 @@
 #include "cmrc/cmrc.hpp"
 
 #include "clang/Tooling/CommonOptionsParser.h"
+#include "llvm/Support/JSON.h"
+#include "llvm/Support/raw_ostream.h"
 
 #include <Core.h>
 #include <FileTree.h>
@@ -65,10 +67,27 @@ int main(int argc, const char** argv)
 	std::string jsContent(jsPage.begin(), jsPage.end());
 
 	std::stringstream filesContent;
-	for (auto& [name, text] : files)
+	std::string bracketsContent;
+	llvm::raw_string_ostream bracketsStream(bracketsContent);
+	llvm::json::OStream bracketsObject(bracketsStream, 4);
+	bracketsObject.objectBegin();
+	for (auto& [name, fileData] : files)
 	{
-		filesContent << text << "\n";
+		filesContent << fileData.mText << "\n";
+
+		bracketsObject.attributeBegin(name);
+		bracketsObject.arrayBegin();
+		for (auto& [from, to] : fileData.mBracketsTable)
+		{
+			bracketsObject.objectBegin();
+			bracketsObject.attribute("from", from);
+			bracketsObject.attribute("to", to);
+			bracketsObject.objectEnd();
+		}
+		bracketsObject.arrayEnd();
+		bracketsObject.attributeEnd();
 	}
+	bracketsObject.objectEnd();
 
 	std::string output = skeletonContent;
 	output = ReplaceAll(output, "<link rel=\"stylesheet\" href=\"styles.css\" />", std::format("<style>\n{}\n</style>\n", stylesContent));
@@ -77,6 +96,7 @@ int main(int argc, const char** argv)
 	output = ReplaceAll(output, "<div class=\"explorer\"></div>", fileTreeHTML);
 	output = ReplaceAll(output, "{PROJECT_TITLE}", projectTitle);
 	output = ReplaceAll(output, "{CODE}", filesContent.str());
+	output = ReplaceAll(output, "{BRACKETS}", std::format("<script>\nvar brackets =\n{}\n</script>\n", bracketsContent));
 
 	std::string outputFilename = "Output/Output.html";
 	std::error_code error;
