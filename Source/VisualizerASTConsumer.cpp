@@ -2,10 +2,10 @@
 
 #include <VisualizerVisitor.h>
 
-VisualizerASTConsumer::VisualizerASTConsumer(clang::Rewriter& rewriter) : mRewriter(rewriter) {}
+VisualizerASTConsumer::VisualizerASTConsumer(clang::Rewriter& rewriter, SymbolTable& symbolTable) : mRewriter(rewriter), mSymbolTable(symbolTable) {}
 
 void VisualizerASTConsumer::HandleTranslationUnit(clang::ASTContext& context)
 {
-	VisualizerVisitor visitor(context, mRewriter);
+	VisualizerVisitor visitor(context, mRewriter, mSymbolTable);
 	visitor.TraverseDecl(context.getTranslationUnitDecl());
 }

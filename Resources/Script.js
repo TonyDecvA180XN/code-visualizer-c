@@ -34,8 +34,11 @@ function hideDropdown() {
   for (var i = 0; i < dropdowns.length; i++) {
     var openDropdown = dropdowns[i];
     openDropdown.classList.add("hidden");
-    // if (!openDropdown.classList.contains("show")) {
-    // }
+  }
+  dropdowns = document.getElementsByClassName("dropdown-content-small");
+  for (var i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+    openDropdown.classList.add("hidden");
   }
 }
 
@@ -46,7 +49,7 @@ function showDropdown(id) {
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function (event) {
-  if (!event.target.matches(".button")) {
+  if (!event.target.matches(".button") && !event.target.parentNode.matches(".dropdown")) {
     hideDropdown();
   }
 };
@@ -196,3 +199,22 @@ let collapseRange = (from, to) => (e) => {
 
   updateCodeView();
 };
+
+function goToDefinition(symbol) {
+  if (symbol in symbols) {
+    var data = symbols[symbol];
+    var filename = data["filename"];
+    var from = data["from"];
+    openFile(filename);
+    var lines = main_view.firstChild.getElementsByTagName("p");
+    lines[from - 1].scrollIntoView();
+  } else {
+    window.alert("Definition of " + symbol + " not found");
+  }
+}
+
+function goToDeclaration(filename, from) {
+  openFile(filename);
+  var lines = main_view.firstChild.getElementsByTagName("p");
+  lines[from - 1].scrollIntoView();
+}

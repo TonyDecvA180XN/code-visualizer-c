@@ -4,12 +4,18 @@
 #include "clang/Frontend/CompilerInstance.h"
 
 #include <Core.h>
+#include <MarkupTree.h>
 #include <filesystem>
 
 using namespace clang;
 using namespace Quote;
 
-VisualizerVisitor::VisualizerVisitor(ASTContext& context, Rewriter& rewriter) : mContext(context), mRewriter(rewriter) {}
+VisualizerVisitor::VisualizerVisitor(ASTContext& context, Rewriter& rewriter, SymbolTable& symbolTable) :
+	mContext(context),
+	mRewriter(rewriter),
+	mSymbolTable(symbolTable)
+{
+}
 
 bool VisualizerVisitor::VisitVarDecl(VarDecl* declaration)
 {
@@ -25,11 +31,22 @@ bool VisualizerVisitor::VisitVarDecl(VarDecl* declaration)
 	mRewriter.InsertText(declaration->getLocation(), MakeOpenSpan("code-id-var"));
 	mRewriter.InsertTextAfterToken(declaration->getLocation(), std::format("</span>"));
 
+	std::string name = declaration->getNameAsString();
+	SourceLocation from = declaration->getBeginLoc(), to = declaration->getEndLoc();
+	PresumedLoc fromDesc = mContext.getFullLoc(from).getPresumedLoc();
+	PresumedLoc toDesc = mContext.getFullLoc(to).getPresumedLoc();
+	std::string filename = UniversalLocalPath(fromDesc.getFilename()).string();
+
+	mSymbolTable[name] = DefinitionLocation{filename, "variable", fromDesc.getLine(), toDesc.getLine()};
+
 	return true;
 }
 
 bool VisualizerVisitor::VisitRecordDecl(RecordDecl* declaration)
 {
+	if (mContext.getSourceManager().isInSystemHeader(declaration->getLocation()))
+		return true;
+
 	SourceLocation nameLocation = declaration->getLocation();
 	SourceLocation keywordLocation = declaration->getBeginLoc();
 
@@ -39,16 +56,34 @@ bool VisualizerVisitor::VisitRecordDecl(RecordDecl* declaration)
 	mRewriter.ReplaceText(keywordLocation, keyword.size(), MakeSpan("code-keyword-decl", keyword));
 	mRewriter.ReplaceText(nameLocation, name.size(), MakeSpan("code-type-user", name));
 
+	SourceLocation from = declaration->getBeginLoc(), to = declaration->getEndLoc();
+	PresumedLoc fromDesc = mContext.getFullLoc(from).getPresumedLoc();
+	PresumedLoc toDesc = mContext.getFullLoc(to).getPresumedLoc();
+	std::string filename = UniversalLocalPath(fromDesc.getFilename()).string();
+
+	mSymbolTable[name] = DefinitionLocation{filename, "struct", fromDesc.getLine(), toDesc.getLine()};
+
 	return true;
 }
 
 bool VisualizerVisitor::VisitFieldDecl(FieldDecl* declaration)
 {
+	if (mContext.getSourceManager().isInSystemHeader(declaration->getLocation()))
+		return true;
+
 	mRewriter.InsertText(declaration->getTypeSpecStartLoc(), MakeOpenSpan("code-type-user"));
 	mRewriter.InsertTextAfterToken(declaration->getTypeSpecEndLoc(), std::format("</span>"));
 
 	mRewriter.InsertText(declaration->getLocation(), MakeOpenSpan("code-id-var"));
 	mRewriter.InsertTextAfterToken(declaration->getLocation(), std::format("</span>"));
+
+	std::string name = declaration->getNameAsString();
+	SourceLocation from = declaration->getBeginLoc(), to = declaration->getEndLoc();
+	PresumedLoc fromDesc = mContext.getFullLoc(from).getPresumedLoc();
+	PresumedLoc toDesc = mContext.getFullLoc(to).getPresumedLoc();
+	std::string filename = UniversalLocalPath(fromDesc.getFilename()).string();
+
+	mSymbolTable[name] = DefinitionLocation{filename, "member", fromDesc.getLine(), toDesc.getLine()};
 
 	return true;
 }
@@ -67,31 +102,35 @@ bool VisualizerVisitor::VisitFunctionDecl(FunctionDecl* declaration)
 	if (declaration->isThisDeclarationADefinition())
 	{
 		SourceLocation from = declaration->getBeginLoc(), to = declaration->getEndLoc();
-		PresumedLoc fullFrom = mContext.getFullLoc(from).getPresumedLoc();
-		PresumedLoc fullTo = mContext.getFullLoc(to).getPresumedLoc();
-		assert(fullFrom.isValid() && fullTo.isValid());
-		//mDefinitions.emplace_back(
-		//Definition{.mName = name, .mFilepath = fullFrom.getFilename(), .mFrom = fullFrom.getLine(), .mTo = fullTo.getLine()});
+		PresumedLoc fromDesc = mContext.getFullLoc(from).getPresumedLoc();
+		PresumedLoc toDesc = mContext.getFullLoc(to).getPresumedLoc();
+		std::string filename = UniversalLocalPath(fromDesc.getFilename()).string();
+
+		mSymbolTable[name] = DefinitionLocation{filename, "function", fromDesc.getLine(), toDesc.getLine()};
+
 		mRewriter.ReplaceText(location, name.size(), MakeSpan("code-id-fun", name));
 	}
 	else
 	{
-		//MarkupTree invokeMenu("span");
-		//MarkupTreeNode& invokeGroup = invokeMenu.GetRoot();
-		//invokeGroup.AddAttribute("class", "dropdown");
-		//MarkupTreeNode& symbol = invokeGroup.AppendChild("span");
-		//symbol.AddAttribute("class", "dropsymbol code-id-fun");
-		//symbol.AddAttribute("onclick", std::format("showDropdown(\'{}\')", std::format("dropdown-{}", name)));
-		//symbol.SetText(name);
-		//MarkupTreeNode& dropdownContent = invokeGroup.AppendChild("span");
-		//dropdownContent.AddAttribute("class", "dropdown-content");
-		//dropdownContent.AddAttribute("id", std::format("dropdown-{}", name));
-		//MarkupTreeNode& goToDef = dropdownContent.AppendChild("span");
-		//goToDef.AddAttribute("onclick", std::format("goToDefinition(\'{}\')", name));
-		//goToDef.SetText("Go to definition");
+		MarkupTree invokeMenu("span");
+		MarkupTreeNode& invokeGroup = invokeMenu.GetRoot();
+		invokeGroup.AddAttribute("class", "dropdown");
 
-		//std::string tag = invokeMenu.ToString(false);
-		mRewriter.ReplaceText(location, name.size(), ReplaceAll(name /*tag*/, "\"", SPECIAL_STRING));
+		MarkupTreeNode& symbol = invokeGroup.AppendChild("span");
+		symbol.AddAttribute("class", "code-id-fun");
+		symbol.AddAttribute("onclick", std::format("showDropdown(\'{}\')", std::format("dropdown-{}", name)));
+		symbol.SetText(name);
+
+		MarkupTreeNode& dropdownContent = invokeGroup.AppendChild("span");
+		dropdownContent.AddAttribute("class", "dropdown-content hidden");
+		dropdownContent.AddAttribute("id", std::format("dropdown-{}", name));
+
+		MarkupTreeNode& gotToDefinition = dropdownContent.AppendChild("span");
+		gotToDefinition.AddAttribute("onclick", std::format("goToDefinition(\'{}\')", name));
+		gotToDefinition.SetText("Go to definition");
+
+		std::string tag = invokeMenu.ToString(false);
+		mRewriter.ReplaceText(location, name.size(), ReplaceAll(tag, "\"", SPECIAL_STRING));
 	}
 	return true;
 }
@@ -106,28 +145,29 @@ bool VisualizerVisitor::VisitDeclRefExpr(DeclRefExpr* expression)
 		PresumedLoc varDeclLocation = mContext.getFullLoc(varDecl->getLocation()).getPresumedLoc();
 		PresumedLoc varRefLocation = mContext.getFullLoc(location).getPresumedLoc();
 
-		std::filesystem::path path(varDeclLocation.getFilename());
-		path = std::filesystem::relative(path);
-		path.replace_extension("html");
+		std::string filename = UniversalLocalPath(varDeclLocation.getFilename()).string();
 
-		//MarkupTree invokeMenu("span");
-		//MarkupTreeNode& invokeGroup = invokeMenu.GetRoot();
-		//invokeGroup.AddAttribute("class", "dropdown");
-		//MarkupTreeNode& symbol = invokeGroup.AppendChild("span");
-		//symbol.AddAttribute("class", "dropsymbol code-id-var");
-		//symbol.AddAttribute(
-		//	"onclick",
-		//	std::format("showDropdown(\'{}\')", std::format("dropdown-{}-{}-{}", name, varRefLocation.getLine(), varRefLocation.getColumn())));
-		//symbol.SetText(name);
-		//MarkupTreeNode& dropdownContent = invokeGroup.AppendChild("span");
-		//dropdownContent.AddAttribute("class", "dropdown-content");
-		//dropdownContent.AddAttribute("id", std::format("dropdown-{}-{}-{}", name, varRefLocation.getLine(), varRefLocation.getColumn()));
-		//MarkupTreeNode& goToDec = dropdownContent.AppendChild("span");
-		//goToDec.AddAttribute("onclick", std::format("goToDeclaration(\'{}\', \'{}\')", path.string(), varDeclLocation.getLine()));
-		//goToDec.SetText("Go to declaration");
+		MarkupTree invokeMenu("span");
+		MarkupTreeNode& invokeGroup = invokeMenu.GetRoot();
+		invokeGroup.AddAttribute("class", "dropdown");
 
-		//std::string tag = invokeMenu.ToString(false);
-		mRewriter.ReplaceText(location, name.size(), ReplaceAll(name /*tag*/, "\"", SPECIAL_STRING));
+		MarkupTreeNode& symbol = invokeGroup.AppendChild("span");
+		symbol.AddAttribute("class", "code-id-var");
+		symbol.AddAttribute(
+			"onclick",
+			std::format("showDropdown(\'{}\')", std::format("dropdown-{}-{}-{}", name, varRefLocation.getLine(), varRefLocation.getColumn())));
+		symbol.SetText(name);
+
+		MarkupTreeNode& dropdownContent = invokeGroup.AppendChild("span");
+		dropdownContent.AddAttribute("class", "dropdown-content hidden");
+		dropdownContent.AddAttribute("id", std::format("dropdown-{}-{}-{}", name, varRefLocation.getLine(), varRefLocation.getColumn()));
+
+		MarkupTreeNode& goToDec = dropdownContent.AppendChild("span");
+		goToDec.AddAttribute("onclick", std::format("goToDeclaration(\'{}\', \'{}\')", filename, varDeclLocation.getLine()));
+		goToDec.SetText("Go to declaration");
+
+		std::string tag = invokeMenu.ToString(false);
+		mRewriter.ReplaceText(location, name.size(), ReplaceAll(tag, "\"", SPECIAL_STRING));
 	}
 
 	return true;
@@ -159,31 +199,32 @@ bool VisualizerVisitor::VisitCallExpr(CallExpr* expression)
 			return true;
 		}
 
-		std::filesystem::path path(funDeclLocation.getFilename());
-		path = std::filesystem::relative(path);
-		path.replace_extension("html");
+		std::string filename = UniversalLocalPath(funDeclLocation.getFilename()).string();
 
-		//MarkupTree invokeMenu("span");
-		//MarkupTreeNode& invokeGroup = invokeMenu.GetRoot();
-		//invokeGroup.AddAttribute("class", "dropdown");
-		//MarkupTreeNode& symbol = invokeGroup.AppendChild("span");
-		//symbol.AddAttribute("class", "dropsymbol code-id-fun");
-		//symbol.AddAttribute(
-		//	"onclick",
-		//	std::format("showDropdown(\'{}\')", std::format("dropdown-{}-{}-{}", name, funRefLocation.getLine(), funRefLocation.getColumn())));
-		//symbol.SetText(name);
-		//MarkupTreeNode& dropdownContent = invokeGroup.AppendChild("span");
-		//dropdownContent.AddAttribute("class", "dropdown-content");
-		//dropdownContent.AddAttribute("id", std::format("dropdown-{}-{}-{}", name, funRefLocation.getLine(), funRefLocation.getColumn()));
-		//MarkupTreeNode& goToDec = dropdownContent.AppendChild("span");
-		//goToDec.AddAttribute("onclick", std::format("goToDeclaration(\'{}\', \'{}\')", path.string(), funDeclLocation.getLine()));
-		//goToDec.SetText("Go to declaration");
-		//MarkupTreeNode& goToDef = dropdownContent.AppendChild("span");
-		//goToDef.AddAttribute("onclick", std::format("goToDefinition(\'{}\')", name));
-		//goToDef.SetText("Go to definition");
+		MarkupTree invokeMenu("span");
+		MarkupTreeNode& invokeGroup = invokeMenu.GetRoot();
+		invokeGroup.AddAttribute("class", "dropdown");
 
-		//std::string tag = invokeMenu.ToString(false);
-		mRewriter.ReplaceText(callLocation, name.size(), ReplaceAll(name /*tag*/, "\"", SPECIAL_STRING));
+		MarkupTreeNode& symbol = invokeGroup.AppendChild("span");
+		symbol.AddAttribute("class", "dropsymbol code-id-fun");
+		symbol.AddAttribute(
+			"onclick",
+			std::format("showDropdown(\'{}\')", std::format("dropdown-{}-{}-{}", name, funRefLocation.getLine(), funRefLocation.getColumn())));
+		symbol.SetText(name);
+
+		MarkupTreeNode& dropdownContent = invokeGroup.AppendChild("span");
+		dropdownContent.AddAttribute("class", "dropdown-content hidden");
+		dropdownContent.AddAttribute("id", std::format("dropdown-{}-{}-{}", name, funRefLocation.getLine(), funRefLocation.getColumn()));
+
+		MarkupTreeNode& goToDec = dropdownContent.AppendChild("span");
+		goToDec.AddAttribute("onclick", std::format("goToDeclaration(\'{}\', \'{}\')", filename, funDeclLocation.getLine()));
+		goToDec.SetText("Go to declaration");
+		MarkupTreeNode& goToDef = dropdownContent.AppendChild("span");
+		goToDef.AddAttribute("onclick", std::format("goToDefinition(\'{}\')", name));
+		goToDef.SetText("Go to definition");
+
+		std::string tag = invokeMenu.ToString(false);
+		mRewriter.ReplaceText(callLocation, name.size(), ReplaceAll(tag, "\"", SPECIAL_STRING));
 
 		//mRewriter.ReplaceText(callLocation, name.size(),
 		//std::format("<a class={}code-id-fun{} onclick={}goToDeclaration(\'{}\'){}>{}</a>", q, q, q, path.string(), q, name));
@@ -195,7 +236,7 @@ bool VisualizerVisitor::VisitUnaryOperator(UnaryOperator* oper)
 {
 	if (oper->getOpcode() == UnaryOperatorKind::UO_AddrOf)
 	{
-		mRewriter.ReplaceText(oper->getOperatorLoc(), 1, "&amp");
+		mRewriter.ReplaceText(oper->getOperatorLoc(), 1, "&amp;");
 	}
 	return true;
 }
@@ -204,11 +245,11 @@ bool VisualizerVisitor::VisitBinaryOperator(BinaryOperator* oper)
 {
 	if (oper->getOpcode() == BinaryOperatorKind::BO_LT || oper->getOpcode() == BinaryOperatorKind::BO_LE)
 	{
-		mRewriter.ReplaceText(oper->getOperatorLoc(), 1, "&lt");
+		mRewriter.ReplaceText(oper->getOperatorLoc(), 1, "&lt;");
 	}
 	if (oper->getOpcode() == BinaryOperatorKind::BO_GT || oper->getOpcode() == BinaryOperatorKind::BO_GE)
 	{
-		mRewriter.ReplaceText(oper->getOperatorLoc(), 1, "&gt");
+		mRewriter.ReplaceText(oper->getOperatorLoc(), 1, "&gt;");
 	}
 	return true;
 }

@@ -9,7 +9,7 @@
 class VisualizerAction : public clang::ASTFrontendAction
 {
 public:
-	VisualizerAction(FileTable& fileTable);
+	VisualizerAction(FileTable& fileTable, SymbolTable& symbolTable);
 
 	std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance& compilerInstance, llvm::StringRef filename) override;
 
@@ -20,4 +20,5 @@ public:
 private:
 	clang::Rewriter mRewriter;
 	FileTable& mFileTable;
+	SymbolTable& mSymbolTable;
 };

@@ -1,12 +1,14 @@
 #pragma once
 
+#include "Core.h"
+
 #include "clang/AST/RecursiveASTVisitor.h"
 #include "clang/Rewrite/Core/Rewriter.h"
 
 class VisualizerVisitor : public clang::RecursiveASTVisitor<VisualizerVisitor>
 {
 public:
-	VisualizerVisitor(clang::ASTContext& context, clang::Rewriter& rewriter);
+	VisualizerVisitor(clang::ASTContext& context, clang::Rewriter& rewriter, SymbolTable& symbolTable);
 
 	bool VisitVarDecl(clang::VarDecl* declaration);
 	bool VisitRecordDecl(clang::RecordDecl* declaration);
@@ -36,4 +38,5 @@ public:
 private:
 	clang::ASTContext& mContext;
 	clang::Rewriter& mRewriter;
+	SymbolTable& mSymbolTable;
 };

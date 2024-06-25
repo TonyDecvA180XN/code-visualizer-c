@@ -11,7 +11,15 @@ struct FileData
 	std::map<size_t, size_t> mBracketsTable;
 };
 
+struct DefinitionLocation
+{
+	std::string mFilename;
+	std::string mType;
+	size_t mFrom, mTo;
+};
+
 using FileTable = std::map<std::string, FileData>;
+using SymbolTable = std::map<std::string, DefinitionLocation>;
 
 inline std::string ReplaceAll(const std::string& source, const std::string& find, const std::string& replace)
 {

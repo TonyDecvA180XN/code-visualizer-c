@@ -17,6 +17,11 @@ int factorial(int v)
 	return v * factorial(v - 1);
 }
 
+void foo(int param1, float param2)
+{
+	param1 = param2 + 4;
+}
+
 /* Multiline one line comment */
 int main(int argc, char** argv)
 {

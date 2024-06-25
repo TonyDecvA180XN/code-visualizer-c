@@ -27,8 +27,9 @@ target_sources(
           Source/VisualizerVisitor.cpp)
 
 target_compile_features(Code-Visualizer-C PRIVATE cxx_std_20)
-target_include_directories(Code-Visualizer-C PRIVATE ${LLVM_INCLUDE_DIRS}
-                                                     Include)
+target_include_directories(Code-Visualizer-C SYSTEM
+                           PRIVATE ${LLVM_INCLUDE_DIRS})
+target_include_directories(Code-Visualizer-C PRIVATE Include)
 target_link_directories(Code-Visualizer-C PRIVATE ${LLVM_LIBRARY_DIRS})
 
 target_link_libraries(Code-Visualizer-C PRIVATE LLVMCore)

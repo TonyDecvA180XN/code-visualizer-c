@@ -6,11 +6,11 @@
 #include <VisualizerASTConsumer.h>
 #include <filesystem>
 
-VisualizerAction::VisualizerAction(FileTable& fileTable) : mFileTable(fileTable) {}
+VisualizerAction::VisualizerAction(FileTable& fileTable, SymbolTable& symbolTable) : mFileTable(fileTable), mSymbolTable(symbolTable) {}
 
 std::unique_ptr<clang::ASTConsumer> VisualizerAction::CreateASTConsumer(clang::CompilerInstance& compilerInstance, llvm::StringRef filename)
 {
-	return std::make_unique<VisualizerASTConsumer>(mRewriter);
+	return std::make_unique<VisualizerASTConsumer>(mRewriter, mSymbolTable);
 }
 
 bool VisualizerAction::BeginSourceFileAction(clang::CompilerInstance& compilerInstance)

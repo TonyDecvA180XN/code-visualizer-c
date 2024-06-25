@@ -9,9 +9,10 @@
 class VisualizerFrontendActionFactory : public clang::tooling::FrontendActionFactory
 {
 public:
-	VisualizerFrontendActionFactory(FileTable& fileTable);
+	VisualizerFrontendActionFactory(FileTable& fileTable, SymbolTable& symbolTable);
 	std::unique_ptr<clang::FrontendAction> create() override;
 
 private:
 	FileTable& mFileTable;
+	SymbolTable& mSymbolTable;
 };
