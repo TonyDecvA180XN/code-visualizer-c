@@ -197,6 +197,10 @@ details.folder summary {
   background-color: var(--hover);
 }
 
+.highlight {
+  background-color: var(--hover);
+}
+
 .hidden {
   display: none;
 }

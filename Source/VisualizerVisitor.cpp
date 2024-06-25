@@ -28,10 +28,11 @@ bool VisualizerVisitor::VisitVarDecl(VarDecl* declaration)
 	mRewriter.InsertText(declaration->getTypeSpecStartLoc(), MakeOpenSpan("code-type-user"));
 	mRewriter.InsertTextAfterToken(declaration->getTypeSpecEndLoc(), std::format("</span>"));
 
-	mRewriter.InsertText(declaration->getLocation(), MakeOpenSpan("code-id-var"));
+	std::string name = declaration->getNameAsString();
+
+	mRewriter.InsertText(declaration->getLocation(), MakeOpenSpan(std::format("code-id-var symbol-{}", name)));
 	mRewriter.InsertTextAfterToken(declaration->getLocation(), std::format("</span>"));
 
-	std::string name = declaration->getNameAsString();
 	SourceLocation from = declaration->getBeginLoc(), to = declaration->getEndLoc();
 	PresumedLoc fromDesc = mContext.getFullLoc(from).getPresumedLoc();
 	PresumedLoc toDesc = mContext.getFullLoc(to).getPresumedLoc();
@@ -108,7 +109,7 @@ bool VisualizerVisitor::VisitFunctionDecl(FunctionDecl* declaration)
 
 		mSymbolTable[name] = DefinitionLocation{filename, "function", fromDesc.getLine(), toDesc.getLine()};
 
-		mRewriter.ReplaceText(location, name.size(), MakeSpan("code-id-fun", name));
+		mRewriter.ReplaceText(location, name.size(), MakeSpan(std::format("code-id-fun symbol-{}", name), name));
 	}
 	else
 	{
@@ -117,7 +118,7 @@ bool VisualizerVisitor::VisitFunctionDecl(FunctionDecl* declaration)
 		invokeGroup.AddAttribute("class", "dropdown");
 
 		MarkupTreeNode& symbol = invokeGroup.AppendChild("span");
-		symbol.AddAttribute("class", "code-id-fun");
+		symbol.AddAttribute("class", std::format("code-id-fun symbol-{}", name));
 		symbol.AddAttribute("onclick", std::format("showDropdown(\'{}\')", std::format("dropdown-{}", name)));
 		symbol.SetText(name);
 
@@ -152,7 +153,7 @@ bool VisualizerVisitor::VisitDeclRefExpr(DeclRefExpr* expression)
 		invokeGroup.AddAttribute("class", "dropdown");
 
 		MarkupTreeNode& symbol = invokeGroup.AppendChild("span");
-		symbol.AddAttribute("class", "code-id-var");
+		symbol.AddAttribute("class", std::format("code-id-var symbol-{}", name));
 		symbol.AddAttribute(
 			"onclick",
 			std::format("showDropdown(\'{}\')", std::format("dropdown-{}-{}-{}", name, varRefLocation.getLine(), varRefLocation.getColumn())));
@@ -206,7 +207,7 @@ bool VisualizerVisitor::VisitCallExpr(CallExpr* expression)
 		invokeGroup.AddAttribute("class", "dropdown");
 
 		MarkupTreeNode& symbol = invokeGroup.AppendChild("span");
-		symbol.AddAttribute("class", "dropsymbol code-id-fun");
+		symbol.AddAttribute("class", std::format("code-id-fun symbol-{}", name));
 		symbol.AddAttribute(
 			"onclick",
 			std::format("showDropdown(\'{}\')", std::format("dropdown-{}-{}-{}", name, funRefLocation.getLine(), funRefLocation.getColumn())));

@@ -128,6 +128,7 @@ function openFile(filename) {
   filter_from.value = 1;
   filter_to.value = clone.childElementCount;
   showCollapseButtons(filename, clone.childElementCount);
+  setupHighlights();
 }
 
 function showLineNumbers(number) {
@@ -217,4 +218,50 @@ function goToDeclaration(filename, from) {
   openFile(filename);
   var lines = main_view.firstChild.getElementsByTagName("p");
   lines[from - 1].scrollIntoView();
+}
+
+function setHighlightingEnabled(classname, enabled) {
+  console.log(classname, enabled);
+  for (var i = 0; i < elementLengths[classname]; i++) {
+    if (enabled) {
+      elements[classname][i].classList.add("highlight");
+    } else {
+      elements[classname][i].classList.remove("highlight");
+    }
+  }
+}
+
+var elements = {};
+var elementLengths = {};
+function setupHighlights() {
+  elements = {};
+  elementLengths = {};
+  for (var currentClass in symbols) {
+    elements[currentClass] = main_view.getElementsByClassName("symbol-" + currentClass);
+    elementLengths[currentClass] = elements[currentClass].length;
+    for (var j = 0; j < elementLengths[currentClass]; j++) {
+      elements[currentClass][j].onmouseover = function () {
+        for (let i = 0; i < this.classList.length; i++) {
+          if (this.classList[i].startsWith("symbol-")) {
+            var name = this.classList[i];
+            break;
+          }
+        }
+        name = name.split("-", 2);
+        name = name[name.length - 1];
+        setHighlightingEnabled(name, true);
+      };
+      elements[currentClass][j].onmouseout = function () {
+        for (let i = 0; i < this.classList.length; i++) {
+          if (this.classList[i].startsWith("symbol-")) {
+            var name = this.classList[i];
+            break;
+          }
+        }
+        name = name.split("-", 2);
+        name = name[name.length - 1];
+        setHighlightingEnabled(name, false);
+      };
+    }
+  }
 }
