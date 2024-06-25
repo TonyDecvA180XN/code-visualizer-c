@@ -1,6 +1,4 @@
 body {
-  background-color: aquamarine;
-
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -30,8 +28,6 @@ body {
 }
 
 .left-container {
-  /* background-color: darksalmon; */
-
   width: 250px;
   display: flex;
   flex-direction: column;
@@ -56,16 +52,12 @@ body {
 }
 
 .explorer {
-  /* background-color: lightskyblue; */
-
   margin: 0.5rem;
   margin-right: 0;
   text-wrap: nowrap;
 }
 
 .file {
-  /* background-color: goldenrod; */
-
   cursor: pointer;
   margin-left: 1rem;
   display: block;
@@ -80,8 +72,6 @@ details.folder summary:hover {
 }
 
 details.folder summary {
-  /* background-color: rgb(15, 14, 27); */
-
   cursor: pointer;
 }
 
@@ -90,8 +80,6 @@ details.folder summary {
 }
 
 .right-container {
-  /* background-color: lightgreen; */
-
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -102,15 +90,11 @@ details.folder summary {
 }
 
 .header {
-  /* background-color: pink; */
-
   display: flex;
   align-items: baseline;
 }
 
 .file-controls {
-  /* background-color: rgb(144, 134, 206); */
-
   justify-content: right;
   display: flex;
   flex-direction: row;
@@ -120,16 +104,12 @@ details.folder summary {
 }
 
 .wrap-setting {
-  /* background-color: darkgray; */
-
   display: flex;
   align-items: baseline;
   margin-right: 1rem;
 }
 
 .filter-setting {
-  /* background-color: aquamarine; */
-
   margin-right: 1rem;
   display: flex;
   flex-direction: row;
@@ -185,7 +165,6 @@ details.folder summary {
   background-color: var(--background);
   min-width: 11rem;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  /* text-align: right; */
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
@@ -193,7 +172,6 @@ details.folder summary {
 
 .dropdown-content div:hover,
 .dropdown-content-small div:hover {
-  /* background-color: #ddd; */
   background-color: var(--hover);
 }
 
@@ -209,7 +187,6 @@ details.folder summary {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  /* overflow-x: scroll; */
   overflow-y: scroll;
 }
 
