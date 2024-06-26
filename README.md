@@ -7,6 +7,7 @@ Table of Contents:
   - [Features](#features)
   - [Getting started](#getting-started)
   - [Usage](#usage)
+  - [Output](#output)
   - [License](#license)
   - [Contact](#contact)
 
@@ -87,6 +88,12 @@ or use `compile_commands.json` if you build your project with CMake and use flag
 ```PS
 .\code-visualizer-c.exe -p compile_commands.json
 ```
+
+## Output
+
+The output will stored in `Output/Output.html`. An example file can be in the repository. Here is what it can look like:
+
+![Screenshot](Output/Screenshot.png)
 
 ## License
 
