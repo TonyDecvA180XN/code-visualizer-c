@@ -1,0 +1,1606 @@
+<html>
+  <head>
+    <style>
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.text-code {
+  font-family: "JetBrainsMono Nerd Font", ui-monospace, Consolas, monospace;
+  font-size: 1rem;
+}
+
+.text-label {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Arial,
+    Helvetica, sans-serif;
+  font-size: 1rem;
+  color: var(--font);
+}
+
+.main-container {
+  background-color: var(--background);
+
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  user-select: none;
+}
+
+.left-container {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.title-container {
+  padding: 0.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  flex-grow: 1;
+  text-wrap: nowrap;
+}
+
+.separator {
+  background-color: var(--separator);
+
+  padding: 2px;
+}
+
+.explorer {
+  margin: 0.5rem;
+  margin-right: 0;
+  text-wrap: nowrap;
+}
+
+.file {
+  cursor: pointer;
+  margin-left: 1rem;
+  display: block;
+}
+
+.file:hover {
+  background-color: var(--hover);
+}
+
+details.folder summary:hover {
+  background-color: var(--hover);
+}
+
+details.folder summary {
+  cursor: pointer;
+}
+
+.filetree-indent {
+  margin-left: 1rem;
+}
+
+.right-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.dragbar {
+  cursor: col-resize;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+}
+
+.file-controls {
+  justify-content: right;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-wrap: nowrap;
+}
+
+.wrap-setting {
+  display: flex;
+  align-items: baseline;
+  margin-right: 1rem;
+}
+
+.filter-setting {
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.indent-setting {
+  margin-right: 1rem;
+}
+
+.number-field {
+  text-align: right;
+  width: 3rem;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: inherit;
+  border-color: #586e75;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 3px;
+}
+
+.button {
+  cursor: pointer;
+  border-color: #586e75;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 3px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content-small {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  background-color: var(--background);
+  min-width: 4rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  text-align: right;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  background-color: var(--background);
+  min-width: 11rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+.dropdown-content div:hover,
+.dropdown-content-small div:hover {
+  background-color: var(--hover);
+}
+
+.highlight {
+  background-color: var(--hover);
+}
+
+.hidden {
+  display: none;
+}
+
+.code-vertical {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.code-horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.line-num-bar {
+  margin-left: 0.5rem;
+  direction: rtl;
+}
+
+.scope-bar {
+  width: 1rem;
+  text-align: center;
+}
+
+.scope-bar > div:hover {
+  background-color: var(--hover);
+}
+
+.collapsed {
+  background-color: #b4d000;
+  border-radius: 3px;
+}
+
+.thin-separator {
+  background-color: var(--separator);
+
+  padding: 1px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.indent {
+  display: inline-block;
+  white-space: pre;
+  tab-size: 4;
+  user-select: text;
+}
+
+p {
+  margin: 0;
+}
+
+.code {
+  user-select: text;
+  display: inline-block;
+}
+
+.code:empty {
+  width: 1px;
+}
+
+</style>
+
+
+    <style>
+.main-container {
+  --background: #e6e1ce;
+  --separator: #a6a295;
+  --hover: #beb9aa;
+  --font: #586e75;
+}
+.code-comment {
+  color: #007a00;
+}
+.code-directive {
+  color: #757575;
+}
+.code-literal-str {
+  color: #e54a00;
+}
+.code-literal-num {
+  color: #708b05;
+}
+.code-type-internal {
+  color: black;
+}
+.code-type-user {
+  color: #00889f;
+}
+.code-keyword-decl {
+  color: #006cb9;
+}
+.code-keyword-oper {
+  color: #990199;
+}
+.code-id-fun {
+  color: #a9670f;
+}
+.code-id-var {
+  color: #1e4164;
+}
+.code-ln {
+  color: #2b6d83;
+}
+
+</style>
+
+  </head>
+
+  <body>
+    <div class="main-container text-label">
+      <div class="left-container" id="left-container">
+        <div class="title-container">
+          <div class="title text-label">C:/Development/code-visualizer-c</div>
+        </div>
+        <div class="separator"></div>
+        <div class="explorer">
+  <details class="folder" open>
+    <summary>TestSuite</summary>
+    <div class="filetree-indent">
+      <a class="file" onclick="openFile('TestSuite/Large.c')">Large.c</a>
+      <details class="folder" open>
+        <summary>Math</summary>
+        <div class="filetree-indent">
+          <a class="file" onclick="openFile('TestSuite/Math/Header.h')">Header.h</a>
+          <a class="file" onclick="openFile('TestSuite/Math/Source.c')">Source.c</a>
+        </div>
+      </details>
+      <a class="file" onclick="openFile('TestSuite/Small.c')">Small.c</a>
+    </div>
+  </details>
+</div>
+
+      </div>
+      <div class="dragbar separator" linkedTo="left-container"></div>
+      <div class="right-container">
+        <div class="header title-container">
+          <div class="filename title" id="filename">Filename</div>
+          <div class="file-controls">
+            <div class="filter-setting">
+              <span>From</span>
+              <input class="number-field" id="filter-from" type="number" value="1" />
+              <span>to</span>
+              <input class="number-field" id="filter-to" type="number" value="100" />
+            </div>
+            <div class="indent-setting">
+              <button class="button" onclick="showDropdown('indentSizeOptions')">Set indentation</button>
+              <span class="dropdown-content-small hidden" id="indentSizeOptions">
+                <div onclick="setIndents(1)">1</div>
+                <div onclick="setIndents(2)">2</div>
+                <div onclick="setIndents(4)">4</div>
+                <div onclick="setIndents(8)">8</div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="separator"></div>
+
+        <div class="code-vertical">
+          <div class="code-horizontal text-code">
+            <div class="line-num-bar" id="line-num-bar"></div>
+            <div class="thin-separator"></div>
+            <div class="scope-bar" id="scope-bar"></div>
+            <div class="thin-separator"></div>
+            <div class="code-view" id="main-view"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+let dragbar = document.getElementsByClassName("dragbar")[0];
+let moveId = dragbar.getAttribute("linkedTo");
+let elementToMove = document.getElementById(moveId);
+
+let moveElement = (dragbar, toMove) => (e) => {
+  document.selection ? document.selection.empty() : window.getSelection().removeAllRanges();
+
+  toMove.style.width = e.pageX - dragbar.offsetWidth / 2 + "px";
+};
+
+let listener = moveElement(dragbar, elementToMove);
+dragbar.addEventListener("mousedown", () => {
+  document.addEventListener("mousemove", listener);
+});
+dragbar.addEventListener("mouseup", () => {
+  document.removeEventListener("mousemove", listener);
+});
+
+var indents = document.getElementsByClassName("indent");
+var indentSize = 4;
+function setIndents(size = indentSize) {
+  indentSize = size;
+  for (let i = 0; i < indents.length; i++) {
+    const element = indents[i];
+    if (element.hasAttribute("level")) {
+      level = Number(element.getAttribute("level"));
+      element.innerHTML = "&nbsp;".repeat(size).repeat(level);
+    }
+  }
+}
+
+function hideDropdown() {
+  var dropdowns = document.getElementsByClassName("dropdown-content");
+  for (var i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+    openDropdown.classList.add("hidden");
+  }
+  dropdowns = document.getElementsByClassName("dropdown-content-small");
+  for (var i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+    openDropdown.classList.add("hidden");
+  }
+}
+
+function showDropdown(id) {
+  hideDropdown();
+  document.getElementById(id).classList.toggle("hidden");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+  if (!event.target.matches(".button") && !event.target.parentNode.matches(".dropdown")) {
+    hideDropdown();
+  }
+};
+
+function updateCodeView() {
+  var line_numbers = line_num_bar.children;
+  var scopes = scope_bar.children;
+  var lines = main_view.firstChild.getElementsByTagName("p");
+
+  for (let id = 0; id < lines.length; id++) {
+    var line_number = line_numbers[id];
+    var scope = scopes[id];
+    var line = lines[id];
+
+    if (line.hasAttribute("filtered") || line.hasAttribute("collapsed")) {
+      line.classList.add("hidden");
+      scope.classList.add("hidden");
+      line_number.classList.add("hidden");
+    } else {
+      line.classList.remove("hidden");
+      scope.classList.remove("hidden");
+      line_number.classList.remove("hidden");
+    }
+  }
+}
+
+function on_filter_change() {
+  var lines = main_view.firstChild.getElementsByTagName("p");
+
+  filter_from.setAttribute("min", 1);
+  filter_from.setAttribute("max", filter_to.value);
+
+  filter_to.setAttribute("min", filter_from.value);
+  filter_to.setAttribute("max", lines.length);
+
+  for (let id = 0; id < lines.length; id++) {
+    var number = id + 1;
+    var line = lines[id];
+    if (number < filter_from.value || number > filter_to.value) {
+      line.setAttribute("filtered", "");
+    } else {
+      line.removeAttribute("filtered");
+    }
+  }
+
+  updateCodeView();
+}
+
+var filter_from = document.getElementById("filter-from");
+var filter_to = document.getElementById("filter-to");
+filter_from.onchange = on_filter_change;
+filter_to.onchange = on_filter_change;
+filter_from.oninput = on_filter_change;
+filter_to.oninput = on_filter_change;
+
+var main_view = document.getElementById("main-view");
+var current_filename = document.getElementById("filename");
+var line_num_bar = document.getElementById("line-num-bar");
+var scope_bar = document.getElementById("scope-bar");
+
+window.onload = function () {
+  openFile(document.getElementsByClassName("code-content")[0].id);
+};
+
+function openFile(filename) {
+  var file = document.getElementById(filename);
+  var clone = file.cloneNode(true);
+  clone.classList.remove("hidden");
+  while (main_view.hasChildNodes()) {
+    main_view.removeChild(main_view.firstChild);
+  }
+  main_view.appendChild(clone);
+  current_filename.innerHTML = filename;
+  setIndents();
+  showLineNumbers(clone.childElementCount);
+  filter_from.value = 1;
+  filter_to.value = clone.childElementCount;
+  showCollapseButtons(filename, clone.childElementCount);
+  setupHighlights();
+}
+
+function showLineNumbers(number) {
+  while (line_num_bar.hasChildNodes()) {
+    line_num_bar.removeChild(line_num_bar.firstChild);
+  }
+  for (var i = 0; i < number; i++) {
+    var ln = document.createElement("div");
+    ln.innerHTML = i + 1;
+    line_num_bar.appendChild(ln);
+  }
+}
+
+function showCollapseButtons(filename, number) {
+  while (scope_bar.hasChildNodes()) {
+    scope_bar.removeChild(scope_bar.firstChild);
+  }
+
+  for (var i = 0; i < number; i++) {
+    var button = document.createElement("div");
+    button.innerHTML = "&nbsp;";
+    scope_bar.appendChild(button);
+  }
+
+  var current_brackets = brackets[filename];
+  for (let i = 0; i < current_brackets.length; i++) {
+    const pair = current_brackets[i];
+    const from = pair["from"];
+    const to = pair["to"];
+
+    var scope = scope_bar.children[from];
+    scope.onclick = collapseRange(from + 1, to + 1);
+    scope.innerHTML = "↓";
+  }
+}
+
+let collapseRange = (from, to) => (e) => {
+  var lines = main_view.firstChild.getElementsByTagName("p");
+  var scope = e.target;
+
+  for (let i = from + 1; i <= to; i++) {
+    var line = lines[i - 1];
+
+    if (scope.hasAttribute("active")) {
+      // unhide
+      if (line.getAttribute("collapsed") == 1) {
+        line.removeAttribute("collapsed");
+      } else {
+        line.setAttribute("collapsed", Number(line.getAttribute("collapsed")) - 1);
+      }
+    } else {
+      // hide
+      if (line.hasAttribute("collapsed")) {
+        line.setAttribute("collapsed", Number(line.getAttribute("collapsed")) + 1);
+      } else {
+        line.setAttribute("collapsed", 1);
+      }
+    }
+  }
+  if (scope.hasAttribute("active")) {
+    scope.removeAttribute("active");
+    scope.classList.remove("collapsed");
+    scope.innerHTML = "↓";
+  } else {
+    scope.setAttribute("active", "");
+    scope.classList.add("collapsed");
+    scope.innerHTML = "→";
+  }
+
+  updateCodeView();
+};
+
+function goToDefinition(symbol) {
+  if (symbol in symbols) {
+    var data = symbols[symbol];
+    var filename = data["filename"];
+    var from = data["from"];
+    openFile(filename);
+    var lines = main_view.firstChild.getElementsByTagName("p");
+    lines[from - 1].scrollIntoView();
+  } else {
+    window.alert("Definition of " + symbol + " not found");
+  }
+}
+
+function goToDeclaration(filename, from) {
+  openFile(filename);
+  var lines = main_view.firstChild.getElementsByTagName("p");
+  lines[from - 1].scrollIntoView();
+}
+
+function setHighlightingEnabled(classname, enabled) {
+  console.log(classname, enabled);
+  for (var i = 0; i < elementLengths[classname]; i++) {
+    if (enabled) {
+      elements[classname][i].classList.add("highlight");
+    } else {
+      elements[classname][i].classList.remove("highlight");
+    }
+  }
+}
+
+var elements = {};
+var elementLengths = {};
+function setupHighlights() {
+  elements = {};
+  elementLengths = {};
+  for (var currentClass in symbols) {
+    elements[currentClass] = main_view.getElementsByClassName("symbol-" + currentClass);
+    elementLengths[currentClass] = elements[currentClass].length;
+    for (var j = 0; j < elementLengths[currentClass]; j++) {
+      elements[currentClass][j].onmouseover = function () {
+        for (let i = 0; i < this.classList.length; i++) {
+          if (this.classList[i].startsWith("symbol-")) {
+            var name = this.classList[i];
+            break;
+          }
+        }
+        name = name.split("-", 2);
+        name = name[name.length - 1];
+        setHighlightingEnabled(name, true);
+      };
+      elements[currentClass][j].onmouseout = function () {
+        for (let i = 0; i < this.classList.length; i++) {
+          if (this.classList[i].startsWith("symbol-")) {
+            var name = this.classList[i];
+            break;
+          }
+        }
+        name = name.split("-", 2);
+        name = name[name.length - 1];
+        setHighlightingEnabled(name, false);
+      };
+    }
+  }
+}
+
+</script>
+
+
+    <div class="code-content hidden" id="TestSuite/Large.c">
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#1"><span class="code-comment">/*</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#2"><span class="code-comment">This is a test file in C language indended to test all possible C features.</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#3"><span class="code-comment">*/</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#4"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#5"><span class="code-comment">// including system/user headers</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#6"><span class="code-directive">#include</span> <span class="code-literal-str">&lt;stdio.h&gt;</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#7"><span class="code-directive">#include</span> <span class="code-literal-str">&quot;Math/Header.h&quot;</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#8"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#9"><span class="code-comment">// struct definition</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#10"><span class="code-keyword-decl">struct</span> <span class="code-type-user">Point</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#11">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#12"><span class="code-type-user"><span class="code-type-user">double</span></span> <span class="code-id-var">x</span>, <span class="code-id-var">y</span>; <span class="code-comment">// multiple definitions on one line</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#13">};</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#14"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#15"><span class="code-comment">// function declaration</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#16"><span class="code-type-user">void</span> <span class="dropdown">  <span class="code-id-fun symbol-foo" onclick="showDropdown('dropdown-foo')">foo</span>  <span class="dropdown-content hidden" id="dropdown-foo"><span onclick="goToDefinition('foo')">Go to definition</span></span></span>(<span class="code-keyword-declaration"><span class="code-type-user">int</span> <span class="code-id-var symbol-param1">param1</span></span>, <span class="code-keyword-declaration"><span class="code-type-user">float</span> <span class="code-id-var symbol-param2">param2</span></span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#17"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#18"><span class="code-comment">// function definition</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#19"><span class="code-type-user">int</span> <span class="code-id-fun symbol-factorial">factorial</span>(<span class="code-keyword-declaration"><span class="code-type-user">int</span> <span class="code-id-var symbol-v">v</span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#20">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#21"><span class="code-keyword-oper">if</span> (<span class="dropdown">  <span class="code-id-var symbol-v" onclick="showDropdown('dropdown-v-21-6')">v</span>  <span class="dropdown-content hidden" id="dropdown-v-21-6"><span onclick="goToDeclaration('TestSuite/Large.c', '19')">Go to declaration</span></span></span> &lt;= <span class="code-literal-num>">1</span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#22"><span class="code-keyword-oper">return</span> <span class="dropdown">  <span class="code-id-var symbol-v" onclick="showDropdown('dropdown-v-22-10')">v</span>  <span class="dropdown-content hidden" id="dropdown-v-22-10"><span onclick="goToDeclaration('TestSuite/Large.c', '19')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#23"><span class="code-keyword-oper">return</span> <span class="dropdown">  <span class="code-id-var symbol-v" onclick="showDropdown('dropdown-v-23-9')">v</span>  <span class="dropdown-content hidden" id="dropdown-v-23-9"><span onclick="goToDeclaration('TestSuite/Large.c', '19')">Go to declaration</span></span></span> * <span class="dropdown">  <span class="code-id-fun symbol-factorial" onclick="showDropdown('dropdown-factorial-23-13')">factorial</span>  <span class="dropdown-content hidden" id="dropdown-factorial-23-13">    <span onclick="goToDeclaration('TestSuite/Large.c', '19')">Go to declaration</span>    <span onclick="goToDefinition('factorial')">Go to definition</span>  </span></span>(<span class="dropdown">  <span class="code-id-var symbol-v" onclick="showDropdown('dropdown-v-23-23')">v</span>  <span class="dropdown-content hidden" id="dropdown-v-23-23"><span onclick="goToDeclaration('TestSuite/Large.c', '19')">Go to declaration</span></span></span> - <span class="code-literal-num>">1</span>); <span class="code-comment">// recursion</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#24">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#25"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#26"><span class="code-type-user">int</span> <span class="code-id-fun symbol-bar">bar</span>()</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#27">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#28"><span class="code-comment">// variables</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#29"><span class="code-keyword-declaration"><span class="code-type-user">int</span> <span class="code-id-var symbol-i">i</span></span> = <span class="code-literal-num>">1</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#30"><span class="code-keyword-declaration">const <span class="code-type-user">float</span> <span class="code-id-var symbol-e">e</span></span> = <span class="code-literal-num>">2.71f</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#31"><span class="code-keyword-declaration"><span class="code-type-user">float</span> <span class="code-id-var symbol-sum">sum</span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#32"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#33"><span class="code-comment">// structs</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#34"><span class="code-keyword-declaration"><span class="code-type-user">struct Point</span> <span class="code-id-var symbol-a">a</span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#35"><span class="dropdown">  <span class="code-id-var symbol-a" onclick="showDropdown('dropdown-a-35-2')">a</span>  <span class="dropdown-content hidden" id="dropdown-a-35-2"><span onclick="goToDeclaration('TestSuite/Large.c', '34')">Go to declaration</span></span></span>.x = <span class="code-literal-num>">7.0</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#36"><span class="dropdown">  <span class="code-id-var symbol-a" onclick="showDropdown('dropdown-a-36-2')">a</span>  <span class="dropdown-content hidden" id="dropdown-a-36-2"><span onclick="goToDeclaration('TestSuite/Large.c', '34')">Go to declaration</span></span></span>.y = <span class="dropdown">  <span class="code-id-var symbol-a" onclick="showDropdown('dropdown-a-36-8')">a</span>  <span class="dropdown-content hidden" id="dropdown-a-36-8"><span onclick="goToDeclaration('TestSuite/Large.c', '34')">Go to declaration</span></span></span>.x * <span class="code-literal-num>">2.0</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#37"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#38"><span class="code-comment">// pointers</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#39"><span class="code-keyword-declaration"><span class="code-type-user">int*</span> <span class="code-id-var symbol-p">p</span></span> = &amp;<span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-39-12')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-39-12"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#40"><span class="code-keyword-declaration">const <span class="code-type-user">int*</span> <span class="code-id-var symbol-ptc">ptc</span></span> = <span class="dropdown">  <span class="code-id-var symbol-p" onclick="showDropdown('dropdown-p-40-19')">p</span>  <span class="dropdown-content hidden" id="dropdown-p-40-19"><span onclick="goToDeclaration('TestSuite/Large.c', '39')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#41"><span class="code-keyword-declaration"><span class="code-type-user">void *</span>const <span class="code-id-var symbol-cp">cp</span></span> = &amp;<span class="dropdown">  <span class="code-id-var symbol-a" onclick="showDropdown('dropdown-a-41-20')">a</span>  <span class="dropdown-content hidden" id="dropdown-a-41-20"><span onclick="goToDeclaration('TestSuite/Large.c', '34')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#42"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#43"><span class="code-comment">// arrays</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#44"><span class="code-keyword-declaration"><span class="code-type-user">int <span class="code-id-var symbol-numbers">numbers</span></span>[<span class="code-literal-num>">3</span>]</span> = {<span class="code-literal-num>">1</span>, <span class="code-literal-num>">2</span>, <span class="code-literal-num>">3</span>};</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#45"><span class="code-keyword-declaration"><span class="code-type-user">char <span class="code-id-var symbol-string">string</span></span>[]</span> = <span class="code-literal-str>">&quot;Hello world&quot;</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#46"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#47"><span class="code-comment">// branching operators</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#48"><span class="code-keyword-oper">if</span> (<span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-48-6')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-48-6"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span> &gt; <span class="code-literal-num>">0</span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#49">{</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#50"><span class="dropdown">  <span class="code-id-var symbol-sum" onclick="showDropdown('dropdown-sum-50-3')">sum</span>  <span class="dropdown-content hidden" id="dropdown-sum-50-3"><span onclick="goToDeclaration('TestSuite/Large.c', '31')">Go to declaration</span></span></span> = <span class="code-literal-num>">2</span> * <span class="dropdown">  <span class="code-id-var symbol-e" onclick="showDropdown('dropdown-e-50-13')">e</span>  <span class="dropdown-content hidden" id="dropdown-e-50-13"><span onclick="goToDeclaration('TestSuite/Large.c', '30')">Go to declaration</span></span></span> * <span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-50-17')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-50-17"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#51">}</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#52"><span class="code-keyword-oper">else</span></span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#53"><span class="dropdown">  <span class="code-id-var symbol-sum" onclick="showDropdown('dropdown-sum-53-3')">sum</span>  <span class="dropdown-content hidden" id="dropdown-sum-53-3"><span onclick="goToDeclaration('TestSuite/Large.c', '31')">Go to declaration</span></span></span> = <span class="code-literal-num>">2</span> * (<span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-53-14')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-53-14"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span> + (<span class="code-type-user">int</span>)(<span class="dropdown">  <span class="code-id-var symbol-e" onclick="showDropdown('dropdown-e-53-24')">e</span>  <span class="dropdown-content hidden" id="dropdown-e-53-24"><span onclick="goToDeclaration('TestSuite/Large.c', '30')">Go to declaration</span></span></span>));</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#54"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#55"><span class="code-keyword-oper">switch</span> (<span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-55-10')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-55-10"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#56">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#57"><span class="code-keyword-oper">case</span> <span class="code-literal-num>">1</span>:</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#58"><span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-58-3')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-58-3"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span>++;</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#59"><span class="code-keyword-oper">break</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#60"><span class="code-keyword-oper">default</span>:</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#61"><span class="code-keyword-oper">break</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#62">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#63"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#64"><span class="code-comment">// loops</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#65"><span class="code-keyword-oper">for</span> (<span class="code-keyword-declaration"><span class="code-type-user">int</span> <span class="code-id-var symbol-j">j</span></span> = <span class="code-literal-num>">0</span>; <span class="dropdown">  <span class="code-id-var symbol-j" onclick="showDropdown('dropdown-j-65-18')">j</span>  <span class="dropdown-content hidden" id="dropdown-j-65-18"><span onclick="goToDeclaration('TestSuite/Large.c', '65')">Go to declaration</span></span></span> &lt; <span class="code-literal-num>">10</span>; ++<span class="dropdown">  <span class="code-id-var symbol-j" onclick="showDropdown('dropdown-j-65-28')">j</span>  <span class="dropdown-content hidden" id="dropdown-j-65-28"><span onclick="goToDeclaration('TestSuite/Large.c', '65')">Go to declaration</span></span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#66">{</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#67"><span class="dropdown">  <span class="code-id-var symbol-sum" onclick="showDropdown('dropdown-sum-67-3')">sum</span>  <span class="dropdown-content hidden" id="dropdown-sum-67-3"><span onclick="goToDeclaration('TestSuite/Large.c', '31')">Go to declaration</span></span></span> += <span class="code-literal-num>">0.5f</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#68">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#69"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#70"><span class="code-keyword-oper">while</span> (<span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-70-9')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-70-9"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span> &gt; <span class="code-literal-num>">0</span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#71">{</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#72"><span class="code-keyword-declaration"><span class="code-type-user">int</span> <span class="code-id-var symbol-a">a</span></span> = <span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-72-11')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-72-11"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span> + <span class="code-literal-num>">4</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#73"><span class="code-keyword-oper">if</span> (<span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-73-7')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-73-7"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span> &gt; <span class="dropdown">  <span class="code-id-var symbol-a" onclick="showDropdown('dropdown-a-73-11')">a</span>  <span class="dropdown-content hidden" id="dropdown-a-73-11"><span onclick="goToDeclaration('TestSuite/Large.c', '72')">Go to declaration</span></span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#74">{</span>
+  </p>
+  <p>
+    <span class="indent" level="3"></span>
+    <span class="code" id="ln#75"><span class="code-keyword-oper">break</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#76">}</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#77"><span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-77-3')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-77-3"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span>--;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#78">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#79"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#80"><span class="code-keyword-oper">do</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#81">{</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#82"><span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-82-3')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-82-3"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span> /= <span class="code-literal-num>">2</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#83"><span class="code-keyword-oper">if</span> (<span class="dropdown">  <span class="code-id-var symbol-sum" onclick="showDropdown('dropdown-sum-83-7')">sum</span>  <span class="dropdown-content hidden" id="dropdown-sum-83-7"><span onclick="goToDeclaration('TestSuite/Large.c', '31')">Go to declaration</span></span></span> &lt;= <span class="dropdown">  <span class="code-id-var symbol-e" onclick="showDropdown('dropdown-e-83-14')">e</span>  <span class="dropdown-content hidden" id="dropdown-e-83-14"><span onclick="goToDeclaration('TestSuite/Large.c', '30')">Go to declaration</span></span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="3"></span>
+    <span class="code" id="ln#84"><span class="code-keyword-oper">continue</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#85">}</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#86"><span class="code-keyword-oper">while</span> (<span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-86-9')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-86-9"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span> % <span class="code-literal-num>">2</span> == <span class="code-literal-num>">0</span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#87"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#88"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#89"><span class="code-comment">// function calls</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#90"><span class="code-id-fun">printf</span>(<span class="code-literal-str>">&quot;%s&quot;</span>, <span class="dropdown">  <span class="code-id-var symbol-string" onclick="showDropdown('dropdown-string-90-15')">string</span>  <span class="dropdown-content hidden" id="dropdown-string-90-15"><span onclick="goToDeclaration('TestSuite/Large.c', '45')">Go to declaration</span></span></span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#91"><span class="dropdown">  <span class="code-id-fun symbol-foo" onclick="showDropdown('dropdown-foo-91-2')">foo</span>  <span class="dropdown-content hidden" id="dropdown-foo-91-2">    <span onclick="goToDeclaration('TestSuite/Large.c', '16')">Go to declaration</span>    <span onclick="goToDefinition('foo')">Go to definition</span>  </span></span>(<span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-91-6')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-91-6"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span>, <span class="code-comment">/*6.26f*/</span> <span class="code-literal-num>">1.23f</span> <span class="code-comment">/*3.27f*/</span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#92"><span class="code-keyword-oper">return</span> <span class="dropdown">  <span class="code-id-fun symbol-abs" onclick="showDropdown('dropdown-abs-92-12')">abs</span>  <span class="dropdown-content hidden" id="dropdown-abs-92-12">    <span onclick="goToDeclaration('TestSuite/Math/Header.h', '12')">Go to declaration</span>    <span onclick="goToDefinition('abs')">Go to definition</span>  </span></span>(<span class="dropdown">  <span class="code-id-var symbol-i" onclick="showDropdown('dropdown-i-92-16')">i</span>  <span class="dropdown-content hidden" id="dropdown-i-92-16"><span onclick="goToDeclaration('TestSuite/Large.c', '29')">Go to declaration</span></span></span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#93">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#94"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#95"><span class="code-comment">// late function definition</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#96"><span class="code-type-user">void</span> <span class="code-id-fun symbol-foo">foo</span>(<span class="code-keyword-declaration"><span class="code-type-user">int</span> <span class="code-id-var symbol-param1">param1</span></span>, <span class="code-keyword-declaration"><span class="code-type-user">float</span> <span class="code-id-var symbol-param2">param2</span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#97">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#98"><span class="dropdown">  <span class="code-id-var symbol-param1" onclick="showDropdown('dropdown-param1-98-2')">param1</span>  <span class="dropdown-content hidden" id="dropdown-param1-98-2"><span onclick="goToDeclaration('TestSuite/Large.c', '96')">Go to declaration</span></span></span> = <span class="dropdown">  <span class="code-id-var symbol-param2" onclick="showDropdown('dropdown-param2-98-11')">param2</span>  <span class="dropdown-content hidden" id="dropdown-param2-98-11"><span onclick="goToDeclaration('TestSuite/Large.c', '96')">Go to declaration</span></span></span> + <span class="code-literal-num>">4</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#99">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#100"></span>
+  </p>
+</div>
+
+<div class="code-content hidden" id="TestSuite/Math/Header.h">
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#1"><span class="code-directive">#pragma</span> once</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#2"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#3"><span class="code-comment">/*</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#4"><span class="code-comment">This is an example math library header file.</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#5"><span class="code-comment">There are functin declarations and global constants.</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#6"><span class="code-comment">*/</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#7"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#8"><span class="code-keyword-declaration">const <span class="code-type-user">double</span> <span class="code-id-var symbol-PI">PI</span></span> = <span class="code-literal-num>">3.1415926</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#9"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#10"><span class="code-type-user">double</span> <span class="dropdown">  <span class="code-id-fun symbol-min" onclick="showDropdown('dropdown-min')">min</span>  <span class="dropdown-content hidden" id="dropdown-min"><span onclick="goToDefinition('min')">Go to definition</span></span></span>(<span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-a">a</span></span>, <span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-b">b</span></span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#11"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#12"><span class="code-type-user">int</span> <span class="dropdown">  <span class="code-id-fun symbol-abs" onclick="showDropdown('dropdown-abs')">abs</span>  <span class="dropdown-content hidden" id="dropdown-abs"><span onclick="goToDefinition('abs')">Go to definition</span></span></span>(<span class="code-keyword-declaration"><span class="code-type-user">int</span> <span class="code-id-var symbol-value">value</span></span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#13"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#14"><span class="code-type-user">double</span> <span class="dropdown">  <span class="code-id-fun symbol-average" onclick="showDropdown('dropdown-average')">average</span>  <span class="dropdown-content hidden" id="dropdown-average"><span onclick="goToDefinition('average')">Go to definition</span></span></span>(<span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-x">x</span></span>, <span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-y">y</span></span>, <span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-z">z</span></span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#15"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#16"><span class="code-type-user">double</span> <span class="dropdown">  <span class="code-id-fun symbol-circle_area" onclick="showDropdown('dropdown-circle_area')">circle_area</span>  <span class="dropdown-content hidden" id="dropdown-circle_area"><span onclick="goToDefinition('circle_area')">Go to definition</span></span></span>(<span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-radius">radius</span></span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#17"></span>
+  </p>
+</div>
+
+<div class="code-content hidden" id="TestSuite/Math/Source.c">
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#1"><span class="code-directive">#include</span> <span class="code-literal-str">&quot;Header.h&quot;</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#2"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#3"><span class="code-comment">/*</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#4"><span class="code-comment">This is an example math library source file.</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#5"><span class="code-comment">There are functin definitions.</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#6"><span class="code-comment">*/</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#7"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#8"><span class="code-type-user">double</span> <span class="code-id-fun symbol-min">min</span>(<span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-a">a</span></span>, <span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-b">b</span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#9">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#10"><span class="code-keyword-oper">if</span> (<span class="dropdown">  <span class="code-id-var symbol-a" onclick="showDropdown('dropdown-a-10-9')">a</span>  <span class="dropdown-content hidden" id="dropdown-a-10-9"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '8')">Go to declaration</span></span></span> &lt; <span class="dropdown">  <span class="code-id-var symbol-b" onclick="showDropdown('dropdown-b-10-13')">b</span>  <span class="dropdown-content hidden" id="dropdown-b-10-13"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '8')">Go to declaration</span></span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#11"><span class="code-keyword-oper">return</span> <span class="dropdown">  <span class="code-id-var symbol-a" onclick="showDropdown('dropdown-a-11-16')">a</span>  <span class="dropdown-content hidden" id="dropdown-a-11-16"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '8')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#12"><span class="code-keyword-oper">else</span></span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#13"><span class="code-keyword-oper">return</span> <span class="dropdown">  <span class="code-id-var symbol-b" onclick="showDropdown('dropdown-b-13-16')">b</span>  <span class="dropdown-content hidden" id="dropdown-b-13-16"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '8')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#14">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#15"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#16"><span class="code-type-user">int</span> <span class="code-id-fun symbol-abs">abs</span>(<span class="code-keyword-declaration"><span class="code-type-user">int</span> <span class="code-id-var symbol-value">value</span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#17">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#18"><span class="code-keyword-oper">if</span> (<span class="dropdown">  <span class="code-id-var symbol-value" onclick="showDropdown('dropdown-value-18-9')">value</span>  <span class="dropdown-content hidden" id="dropdown-value-18-9"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '16')">Go to declaration</span></span></span> &lt; <span class="code-literal-num>">0</span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#19"><span class="code-keyword-oper">return</span> -<span class="dropdown">  <span class="code-id-var symbol-value" onclick="showDropdown('dropdown-value-19-17')">value</span>  <span class="dropdown-content hidden" id="dropdown-value-19-17"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '16')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#20"><span class="code-keyword-oper">return</span> <span class="dropdown">  <span class="code-id-var symbol-value" onclick="showDropdown('dropdown-value-20-12')">value</span>  <span class="dropdown-content hidden" id="dropdown-value-20-12"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '16')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#21">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#22"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#23"><span class="code-type-user">double</span> <span class="code-id-fun symbol-average">average</span>(<span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-x">x</span></span>, <span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-y">y</span></span>, <span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-z">z</span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#24">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#25"><span class="code-keyword-oper">return</span> (<span class="dropdown">  <span class="code-id-var symbol-x" onclick="showDropdown('dropdown-x-25-13')">x</span>  <span class="dropdown-content hidden" id="dropdown-x-25-13"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '23')">Go to declaration</span></span></span> + <span class="dropdown">  <span class="code-id-var symbol-y" onclick="showDropdown('dropdown-y-25-17')">y</span>  <span class="dropdown-content hidden" id="dropdown-y-25-17"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '23')">Go to declaration</span></span></span> + <span class="dropdown">  <span class="code-id-var symbol-z" onclick="showDropdown('dropdown-z-25-21')">z</span>  <span class="dropdown-content hidden" id="dropdown-z-25-21"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '23')">Go to declaration</span></span></span>) / <span class="code-literal-num>">3.0</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#26">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#27"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#28"><span class="code-type-user">double</span> <span class="code-id-fun symbol-circle_area">circle_area</span>(<span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-radius">radius</span></span>)</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#29">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#30"><span class="code-keyword-oper">return</span> <span class="dropdown">  <span class="code-id-var symbol-PI" onclick="showDropdown('dropdown-PI-30-12')">PI</span>  <span class="dropdown-content hidden" id="dropdown-PI-30-12"><span onclick="goToDeclaration('TestSuite/Math/Header.h', '8')">Go to declaration</span></span></span> * <span class="dropdown">  <span class="code-id-var symbol-radius" onclick="showDropdown('dropdown-radius-30-17')">radius</span>  <span class="dropdown-content hidden" id="dropdown-radius-30-17"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '28')">Go to declaration</span></span></span> * <span class="dropdown">  <span class="code-id-var symbol-radius" onclick="showDropdown('dropdown-radius-30-26')">radius</span>  <span class="dropdown-content hidden" id="dropdown-radius-30-26"><span onclick="goToDeclaration('TestSuite/Math/Source.c', '28')">Go to declaration</span></span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#31">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#32"></span>
+  </p>
+</div>
+
+<div class="code-content hidden" id="TestSuite/Small.c">
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#1"><span class="code-comment">// This is a sample file in C language</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#2"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#3"><span class="code-directive">#include</span> <span class="code-literal-str">&quot;Math/Header.h&quot;</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#4"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#5"><span class="code-directive">#include</span> <span class="code-literal-str">&lt;stdio.h&gt;</span></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#6"></span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#7"><span class="code-type-user">int</span> <span class="code-id-fun symbol-main">main</span>()</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#8">{</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#9"><span class="code-keyword-declaration"><span class="code-type-user">double</span> <span class="code-id-var symbol-r">r</span></span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#10"><span class="code-id-fun">scanf_s</span>(<span class="code-literal-str>">&quot;%f&quot;</span>, <span class="dropdown">  <span class="code-id-var symbol-r" onclick="showDropdown('dropdown-r-10-19')">r</span>  <span class="dropdown-content hidden" id="dropdown-r-10-19"><span onclick="goToDeclaration('TestSuite/Small.c', '9')">Go to declaration</span></span></span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#11"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#12"><span class="code-keyword-oper">if</span> (<span class="dropdown">  <span class="code-id-fun symbol-abs" onclick="showDropdown('dropdown-abs-12-9')">abs</span>  <span class="dropdown-content hidden" id="dropdown-abs-12-9">    <span onclick="goToDeclaration('TestSuite/Math/Header.h', '12')">Go to declaration</span>    <span onclick="goToDefinition('abs')">Go to definition</span>  </span></span>((<span class="code-type-user">int</span>)(<span class="dropdown">  <span class="code-id-var symbol-r" onclick="showDropdown('dropdown-r-12-19')">r</span>  <span class="dropdown-content hidden" id="dropdown-r-12-19"><span onclick="goToDeclaration('TestSuite/Small.c', '9')">Go to declaration</span></span></span>)) != <span class="dropdown">  <span class="code-id-var symbol-r" onclick="showDropdown('dropdown-r-12-26')">r</span>  <span class="dropdown-content hidden" id="dropdown-r-12-26"><span onclick="goToDeclaration('TestSuite/Small.c', '9')">Go to declaration</span></span></span>) <span class="code-comment">// negative radius</span></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#13">{</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#14"><span class="code-id-fun">printf</span>(<span class="code-literal-str>">&quot;Invalid input&quot;</span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="2"></span>
+    <span class="code" id="ln#15"><span class="code-keyword-oper">return</span> -<span class="code-literal-num>">1</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#16">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#17"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#18"><span class="code-keyword-declaration">const <span class="code-type-user">double</span> <span class="code-id-var symbol-a">a</span></span> = <span class="dropdown">  <span class="code-id-fun symbol-circle_area" onclick="showDropdown('dropdown-circle_area-18-22')">circle_area</span>  <span class="dropdown-content hidden" id="dropdown-circle_area-18-22">    <span onclick="goToDeclaration('TestSuite/Math/Header.h', '16')">Go to declaration</span>    <span onclick="goToDefinition('circle_area')">Go to definition</span>  </span></span>(<span class="dropdown">  <span class="code-id-var symbol-r" onclick="showDropdown('dropdown-r-18-34')">r</span>  <span class="dropdown-content hidden" id="dropdown-r-18-34"><span onclick="goToDeclaration('TestSuite/Small.c', '9')">Go to declaration</span></span></span>);</span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#19"><span class="code-keyword-declaration">const <span class="code-type-user">double</span> <span class="code-id-var symbol-treshold">treshold</span></span> = <span class="code-literal-num>">42.3</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#20"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#21"><span class="code-id-fun">printf</span>(<span class="code-literal-str>">&quot;Lowest is %f&quot;</span>, <span class="dropdown">  <span class="code-id-fun symbol-min" onclick="showDropdown('dropdown-min-21-28')">min</span>  <span class="dropdown-content hidden" id="dropdown-min-21-28">    <span onclick="goToDeclaration('TestSuite/Math/Header.h', '10')">Go to declaration</span>    <span onclick="goToDefinition('min')">Go to definition</span>  </span></span>(<span class="dropdown">  <span class="code-id-var symbol-a" onclick="showDropdown('dropdown-a-21-32')">a</span>  <span class="dropdown-content hidden" id="dropdown-a-21-32"><span onclick="goToDeclaration('TestSuite/Small.c', '18')">Go to declaration</span></span></span>, <span class="dropdown">  <span class="code-id-var symbol-treshold" onclick="showDropdown('dropdown-treshold-21-35')">treshold</span>  <span class="dropdown-content hidden" id="dropdown-treshold-21-35"><span onclick="goToDeclaration('TestSuite/Small.c', '19')">Go to declaration</span></span></span>));</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#22"></span>
+  </p>
+  <p>
+    <span class="indent" level="1"></span>
+    <span class="code" id="ln#23"><span class="code-keyword-oper">return</span> <span class="code-literal-num>">0</span>;</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#24">}</span>
+  </p>
+  <p>
+    <span class="indent" level="0"></span>
+    <span class="code" id="ln#25"></span>
+  </p>
+</div>
+
+ <script>
+var brackets =
+{
+    "TestSuite/Large.c": [
+        {
+            "from": 10,
+            "to": 12
+        },
+        {
+            "from": 19,
+            "to": 23
+        },
+        {
+            "from": 26,
+            "to": 92
+        },
+        {
+            "from": 48,
+            "to": 50
+        },
+        {
+            "from": 55,
+            "to": 61
+        },
+        {
+            "from": 65,
+            "to": 67
+        },
+        {
+            "from": 70,
+            "to": 77
+        },
+        {
+            "from": 73,
+            "to": 75
+        },
+        {
+            "from": 80,
+            "to": 84
+        },
+        {
+            "from": 96,
+            "to": 98
+        }
+    ],
+    "TestSuite/Math/Header.h": [],
+    "TestSuite/Math/Source.c": [
+        {
+            "from": 8,
+            "to": 13
+        },
+        {
+            "from": 16,
+            "to": 20
+        },
+        {
+            "from": 23,
+            "to": 25
+        },
+        {
+            "from": 28,
+            "to": 30
+        }
+    ],
+    "TestSuite/Small.c": [
+        {
+            "from": 7,
+            "to": 23
+        },
+        {
+            "from": 12,
+            "to": 15
+        }
+    ]
+}
+</script>
+ <script>
+var symbols =
+{
+    "PI": {
+        "filename": "TestSuite/Math/Header.h",
+        "type": "variable",
+        "from": 8,
+        "to": 8
+    },
+    "Point": {
+        "filename": "TestSuite/Large.c",
+        "type": "struct",
+        "from": 10,
+        "to": 13
+    },
+    "a": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "variable",
+        "from": 8,
+        "to": 8
+    },
+    "abs": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "function",
+        "from": 16,
+        "to": 21
+    },
+    "average": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "function",
+        "from": 23,
+        "to": 26
+    },
+    "b": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "variable",
+        "from": 8,
+        "to": 8
+    },
+    "bar": {
+        "filename": "TestSuite/Large.c",
+        "type": "function",
+        "from": 26,
+        "to": 93
+    },
+    "circle_area": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "function",
+        "from": 28,
+        "to": 31
+    },
+    "cp": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 41,
+        "to": 41
+    },
+    "e": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 30,
+        "to": 30
+    },
+    "factorial": {
+        "filename": "TestSuite/Large.c",
+        "type": "function",
+        "from": 19,
+        "to": 24
+    },
+    "foo": {
+        "filename": "TestSuite/Large.c",
+        "type": "function",
+        "from": 96,
+        "to": 99
+    },
+    "i": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 29,
+        "to": 29
+    },
+    "j": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 65,
+        "to": 65
+    },
+    "main": {
+        "filename": "TestSuite/Small.c",
+        "type": "function",
+        "from": 7,
+        "to": 24
+    },
+    "min": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "function",
+        "from": 8,
+        "to": 14
+    },
+    "numbers": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 44,
+        "to": 44
+    },
+    "p": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 39,
+        "to": 39
+    },
+    "param1": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 96,
+        "to": 96
+    },
+    "param2": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 96,
+        "to": 96
+    },
+    "ptc": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 40,
+        "to": 40
+    },
+    "r": {
+        "filename": "TestSuite/Small.c",
+        "type": "variable",
+        "from": 9,
+        "to": 9
+    },
+    "radius": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "variable",
+        "from": 28,
+        "to": 28
+    },
+    "string": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 45,
+        "to": 45
+    },
+    "sum": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 31,
+        "to": 31
+    },
+    "treshold": {
+        "filename": "TestSuite/Small.c",
+        "type": "variable",
+        "from": 19,
+        "to": 19
+    },
+    "v": {
+        "filename": "TestSuite/Large.c",
+        "type": "variable",
+        "from": 19,
+        "to": 19
+    },
+    "value": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "variable",
+        "from": 16,
+        "to": 16
+    },
+    "x": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "variable",
+        "from": 23,
+        "to": 23
+    },
+    "y": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "variable",
+        "from": 23,
+        "to": 23
+    },
+    "z": {
+        "filename": "TestSuite/Math/Source.c",
+        "type": "variable",
+        "from": 23,
+        "to": 23
+    }
+}
+</script>
+
+  </body>
+</html>
