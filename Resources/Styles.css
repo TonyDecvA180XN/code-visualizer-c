@@ -1,0 +1,243 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.text-code {
+  font-family: "JetBrainsMono Nerd Font", ui-monospace, Consolas, monospace;
+  font-size: 1rem;
+}
+
+.text-label {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", Arial,
+    Helvetica, sans-serif;
+  font-size: 1rem;
+  color: var(--font);
+}
+
+.main-container {
+  background-color: var(--background);
+
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  user-select: none;
+}
+
+.left-container {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.title-container {
+  padding: 0.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  flex-grow: 1;
+  text-wrap: nowrap;
+}
+
+.separator {
+  background-color: var(--separator);
+
+  padding: 2px;
+}
+
+.explorer {
+  margin: 0.5rem;
+  margin-right: 0;
+  text-wrap: nowrap;
+}
+
+.file {
+  cursor: pointer;
+  margin-left: 1rem;
+  display: block;
+}
+
+.file:hover {
+  background-color: var(--hover);
+}
+
+details.folder summary:hover {
+  background-color: var(--hover);
+}
+
+details.folder summary {
+  cursor: pointer;
+}
+
+.filetree-indent {
+  margin-left: 1rem;
+}
+
+.right-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.dragbar {
+  cursor: col-resize;
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+}
+
+.file-controls {
+  justify-content: right;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  text-wrap: nowrap;
+}
+
+.wrap-setting {
+  display: flex;
+  align-items: baseline;
+  margin-right: 1rem;
+}
+
+.filter-setting {
+  margin-right: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.indent-setting {
+  margin-right: 1rem;
+}
+
+.number-field {
+  text-align: right;
+  width: 3rem;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-family: inherit;
+  border-color: #586e75;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 3px;
+}
+
+.button {
+  cursor: pointer;
+  border-color: #586e75;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 3px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content-small {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  background-color: var(--background);
+  min-width: 4rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  text-align: right;
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  background-color: var(--background);
+  min-width: 11rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+.dropdown-content div:hover,
+.dropdown-content-small div:hover {
+  background-color: var(--hover);
+}
+
+.highlight {
+  background-color: var(--hover);
+}
+
+.hidden {
+  display: none;
+}
+
+.code-vertical {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.code-horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.line-num-bar {
+  margin-left: 0.5rem;
+  direction: rtl;
+}
+
+.scope-bar {
+  width: 1rem;
+  text-align: center;
+}
+
+.scope-bar > div:hover {
+  background-color: var(--hover);
+}
+
+.collapsed {
+  background-color: #b4d000;
+  border-radius: 3px;
+}
+
+.thin-separator {
+  background-color: var(--separator);
+
+  padding: 1px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.indent {
+  display: inline-block;
+  white-space: pre;
+  tab-size: 4;
+  user-select: text;
+}
+
+p {
+  margin: 0;
+}
+
+.code {
+  user-select: text;
+  display: inline-block;
+}
+
+.code:empty {
+  width: 1px;
+}

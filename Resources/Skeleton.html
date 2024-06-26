@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+
+  <body>
+    <div class="main-container text-label">
+      <div class="left-container" id="left-container">
+        <div class="title-container">
+          <div class="title text-label">{PROJECT_TITLE}</div>
+        </div>
+        <div class="separator"></div>
+        <div class="explorer"></div>
+      </div>
+      <div class="dragbar separator" linkedTo="left-container"></div>
+      <div class="right-container">
+        <div class="header title-container">
+          <div class="filename title" id="filename">Filename</div>
+          <div class="file-controls">
+            <div class="filter-setting">
+              <span>From</span>
+              <input class="number-field" id="filter-from" type="number" value="1" />
+              <span>to</span>
+              <input class="number-field" id="filter-to" type="number" value="100" />
+            </div>
+            <div class="indent-setting">
+              <button class="button" onclick="showDropdown('indentSizeOptions')">Set indentation</button>
+              <span class="dropdown-content-small hidden" id="indentSizeOptions">
+                <div onclick="setIndents(1)">1</div>
+                <div onclick="setIndents(2)">2</div>
+                <div onclick="setIndents(4)">4</div>
+                <div onclick="setIndents(8)">8</div>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="separator"></div>
+
+        <div class="code-vertical">
+          <div class="code-horizontal text-code">
+            <div class="line-num-bar" id="line-num-bar"></div>
+            <div class="thin-separator"></div>
+            <div class="scope-bar" id="scope-bar"></div>
+            <div class="thin-separator"></div>
+            <div class="code-view" id="main-view"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    {CODE} {BRACKETS} {SYMBOLS}
+  </body>
+</html>
